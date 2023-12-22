@@ -1,0 +1,35 @@
+.info_container{
+    font-size: 18px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: .5rem;
+    border-radius: 5px;
+}
+
+.info_box{
+    text-align: center;
+    font-family: 'Main';
+    background: var(--second-color);
+    border-radius: 5px;
+    padding-block: 1rem;
+    color: var(--third-color);
+}
+.info_box span{
+    font-size: 1em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: .5rem;
+}
+.info_box div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+}
+.info_box div span{
+    margin-bottom: 0;
+}

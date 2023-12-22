@@ -1,0 +1,42 @@
+.info_wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: rgb(210, 208, 208);
+    border-radius: 5px;
+    font-family: 'Main';
+
+    animation: openWrapper .40s ease forwards;
+
+    height: 0px;
+    overflow: hidden;
+}
+
+@keyframes openWrapper {
+    from{
+        opacity: 0;
+    }
+    to{
+        height: 90px;
+        opacity: 1;
+        margin: .5rem;
+    }
+}
+
+.button{
+    width: 100%;
+    padding: 1rem;
+    color: white;
+    font-family: 'Main';
+    border: none;
+    font-size: 1rem;
+    background: rgb(8, 111, 95);
+    cursor: pointer;
+    margin-bottom: 0px;
+}
+
+.button:hover{
+    opacity: .9;
+}

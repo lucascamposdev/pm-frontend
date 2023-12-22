@@ -1,0 +1,38 @@
+
+
+header hr{
+    margin-top: 1rem;
+}
+
+header div{
+    display: flex;
+    flex-wrap: wrap;
+}
+.title{
+    font-family: 'Second';
+    color: var(--third-color);
+}
+.link{
+    margin-left: auto;
+}
+
+
+
+.loading_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+}
+
+
+@media (max-width: 500px){
+    .title{
+        padding-right: 1rem;
+        margin-right: auto;
+    }
+    .link{
+        margin: 0;
+    }
+}
+

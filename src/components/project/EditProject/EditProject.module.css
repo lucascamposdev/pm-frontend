@@ -1,0 +1,13 @@
+.edit{
+    font-family: 'Main';
+    font-weight: bold;
+    color: var(--third-color);
+    cursor: pointer;
+}
+.edit:hover{
+    opacity: .8;
+}
+
+.form button{
+    margin-bottom: 1rem;
+}

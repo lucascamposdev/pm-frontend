@@ -1,0 +1,33 @@
+.message{
+    font-family: 'Main';
+    border: 1px solid;
+    border-radius: 3px;
+    padding: .5rem;
+    margin-block: .1rem;
+    animation: showMessage .20s ease forwards;
+}
+
+.error{
+    background: #ECC8C5;
+    border-color: #BF3938;
+    color: #BF3938;
+}
+
+.success{
+    background: #D4EDDA;
+    border-color: #155724;
+    color: #155724;
+}
+
+@keyframes showMessage {
+    from{
+        transform: scaleY(0);
+        margin-top: -1rem;
+        opacity: 0;
+    }
+    to{
+
+        margin-top: 0;
+        transform: scaleY(1);
+    }
+}

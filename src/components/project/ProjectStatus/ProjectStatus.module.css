@@ -1,0 +1,13 @@
+.container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Main';
+    background: var(--second-color);
+    border-radius: 5px;
+    padding-block: 1rem;
+    gap: .5rem;
+    cursor: pointer;
+}
+

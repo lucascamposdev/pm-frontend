@@ -1,0 +1,40 @@
+.row{
+    border: 1px solid rgb(228, 227, 227);
+    border-radius: 5px;
+
+}
+
+.row td{
+    transition: all .50s ease;
+}
+.row p{
+    margin-left: 1rem;
+    font-size: .8rem;
+}
+
+.row td:first-child{
+    padding: .5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row td:nth-child(2){
+    cursor: pointer;
+}
+
+.row td:nth-child(3),
+.row td:nth-child(4){
+    padding-inline: 0;
+    text-align: center;
+}
+
+.opacityTask{
+    opacity: .5;
+}
+
+
+
+
+
+

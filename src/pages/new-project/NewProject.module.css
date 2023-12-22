@@ -1,0 +1,27 @@
+.header{
+    font-family: 'Second';
+    color: var(--third-color);
+}
+.header div{
+    display: flex;
+    gap: 1rem;
+}
+.header hr{
+    margin-block: 1rem;
+}
+
+.back_arrow{
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.form{
+    font-family: 'Main';
+    max-width: 500px;
+}
+.form input{
+    margin-bottom: 1rem;
+}
+.form button{
+    margin-bottom: 1rem;
+}

@@ -1,0 +1,108 @@
+.container{
+    width: 100%;
+}
+.container button{
+    margin-bottom: 1rem;
+}
+
+
+.header{
+    font-family: 'Main';
+    font-weight: bold;
+    display:flex;
+    align-items:center;
+    color: white;
+
+    background: var(--third-color);
+    border-radius: 5px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all .20s ease;
+}
+.header:active{
+    padding-inline: 2rem;
+}
+.header i{
+    margin-left:auto;
+}
+
+
+
+.form{
+    font-family: 'Main';
+    box-shadow: 0 0 10px 1px rgba(128, 128, 128, 0.31);
+    border: 1px solid rgba(128, 128, 128, 0.31);
+    border-radius: 5px;
+    transform-origin: top;
+    height: 0;
+    visibility: hidden;
+}
+.form button{
+    margin-block: 1rem;
+    width: 100%;
+}
+
+
+
+.input_wrapper{
+    padding-block: .2rem;
+    border-radius: 5px;
+    display: flex;
+    gap: .5rem;
+}
+
+.label{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    background: var(--third-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 125px;
+    border-radius: 5px;
+    padding: .5rem;
+}
+.optional{
+    font-size: .7rem;
+    color: grey;
+}
+.open_form{
+    padding: 1rem;
+    margin-top: .5rem;
+    visibility: visible;
+
+    height: auto;
+    animation: openForm .20s ease forwards;
+}
+.close_form{
+    visibility: hidden;
+    height: 0;
+}
+
+@keyframes openForm {
+    from{
+        transform: scaleY(0);
+        opacity: 0;
+    }
+    to{
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 520px){
+    .input_wrapper{
+        padding-block: .2rem;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+    .label{
+        width: 100%;
+    }
+}
+

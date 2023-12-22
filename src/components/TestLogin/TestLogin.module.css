@@ -1,0 +1,49 @@
+.container{
+    padding: .5rem;
+    background: #CDE8F5;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 5px;
+}
+
+.title{
+    font-family: 'Second';
+    color: var(--third-color);
+}
+
+.wrapper{
+    display: flex;
+}
+
+.wrapper .box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    font-weight: bold;
+    font-family: 'Main';
+
+    height: 100px;
+    width: 125px;
+    width: 50%;
+
+    margin: .5rem;
+    border-radius: 3px;
+
+    border: 1px solid #4480ae4c;
+    color: #4480AE;
+    cursor: pointer;
+}
+.wrapper .box i{
+    font-size: 1.5rem;
+    margin-bottom: .5rem;
+}
+
+.wrapper .box:hover{
+    background: #bddded;
+}
+
+.container p{
+    font-family: 'Main';
+}
