@@ -17,7 +17,6 @@ const UserSettings = () => {
   const dispatch = useDispatch();
 
   useEffect(() =>{
-    console.log('despachou')
     dispatch(getuser(auth.id))
     dispatch(getprofile(auth.id))
     }, [])

@@ -1,14 +1,25 @@
 import styles from './Tasks.module.css'
 
-// Hooks
-import { useSelector } from 'react-redux'
-
-// Reducer
+// Components
 import Table from '../../components/shared/Table/Table'
 
+// Hooks
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+
+// Reducer
+import getuser from '../../reducers/userReducer'
+
 const Tasks = () => {
+  const { auth } = useSelector(state => state.authReducer)
   const { user } = useSelector(state => state.userReducer)
   const { task } = useSelector(state => state.taskReducer)
+  const dispatch = useDispatch();
+
+  useEffect(() =>{
+    console.log('despachando tasks do usuario')
+    dispatch(getuser(auth.id))
+  }, [task])
 
   return (
     <div className='page'>
