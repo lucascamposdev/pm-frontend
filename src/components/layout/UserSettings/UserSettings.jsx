@@ -9,17 +9,23 @@ import { useState, useEffect } from 'react'
 
 // Reducer
 import { getprofile, getuser } from '../../../reducers/userReducer'
+import { getProjects } from '../../../reducers/projectReducer'
 
 const UserSettings = () => {
 
   const { auth } = useSelector(state => state.authReducer)
   const { profile } = useSelector(state => state.userReducer)
+  const { task } = useSelector(state => state.taskReducer)
   const dispatch = useDispatch();
 
   useEffect(() =>{
-    dispatch(getuser(auth.id))
     dispatch(getprofile(auth.id))
-    }, [])
+    dispatch(getProjects())
+  }, [])
+
+  useEffect(() =>{
+    dispatch(getuser(auth.id))
+  }, [task])
 
     const [ dropdown, setDropdown ] = useState(false)
 

@@ -8,7 +8,7 @@ import { finalize } from '../../../reducers/taskReducer';
 
 const FinalizeTask = () => {
 
-  const { user } = useSelector(state => state.userReducer)
+  const { profile } = useSelector(state => state.userReducer)
   const { task, responsable, minorLoading } = useSelector(state => state.taskReducer)
 
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const FinalizeTask = () => {
     <>
     {!minorLoading && 
     (
-      (task.status == 1 && responsable === user.name) && (
+      (task.status == 1 && responsable === profile.name) && (
         <span className={styles.info_wrapper}>
           <button className={styles.button} onClick={handleFinalize}>
             Finalizar Task

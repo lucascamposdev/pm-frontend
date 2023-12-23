@@ -217,7 +217,8 @@ export const taskReducer = createSlice({
             state.success = false
         })
         .addCase(deleteTask.fulfilled, (state, action) =>{
-            state.tasks = state.tasks.filter(task => task.id != action.payload)
+            state.tasks = state.tasks.filter(task => task.id != action.payload),
+            state.task = {}
         })
         .addCase(taskBelongsTo.pending, (state) =>{
             state.error = false,

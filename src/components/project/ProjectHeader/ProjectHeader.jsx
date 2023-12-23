@@ -11,9 +11,9 @@ import EditProject from '../EditProject/EditProject'
 
 const ProjectHeader = ({ project }) => {
     
-    const { user } = useSelector(state => state.userReducer)
+    const { profile } = useSelector(state => state.userReducer)
   
-  if(!user){
+  if(!profile){
     return ('')
   }
     
@@ -28,7 +28,7 @@ const ProjectHeader = ({ project }) => {
         {/* Title */}
         <span className={styles.title_wrapper}>
             <h1 className={styles.title}>{project.name}</h1>
-            {user.id == project.userId && <EditProject project={project}/>}
+            {profile.id == project.userId && <EditProject project={project}/>}
         </span>
 
         {/* Client Name */}

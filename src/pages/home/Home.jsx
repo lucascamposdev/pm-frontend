@@ -17,11 +17,6 @@ import {Link} from 'react-router-dom'
 const Home = () => {
 
   const { projects, loading } = useSelector(state => state.projectReducer)
-  const dispatch = useDispatch();
-
-  useEffect(() =>{
-    dispatch(getProjects())
-  }, [])
 
   return (
     <div className='page'>

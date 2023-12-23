@@ -23,7 +23,7 @@ const ProjectPage = () => {
 
   const { id } = useParams();
   const { project } = useSelector(state => state.projectReducer)
-  const { user } = useSelector(state => state.userReducer)
+  const { profile } = useSelector(state => state.userReducer)
   const { task, tasks } = useSelector(state => state.taskReducer)
 
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const ProjectPage = () => {
     }
   }, [project])
 
-  if(!project.id || !user){
+  if(!project.id || !profile){
     return (
       <main className="page">
         <LoadingSpinner/>
@@ -52,9 +52,9 @@ const ProjectPage = () => {
         <hr/>
         <ProjectInfo project={project} />
 
-        {user && user.id === project.userId ? <CreateTask/> : ''}
+        {profile && profile.id === project.userId ? <CreateTask/> : ''}
 
-        <Table task={task} tasks={tasks} isOwner={user.id == project.userId}/>
+        <Table task={task} tasks={tasks} isOwner={profile.id == project.userId}/>
     </main>
   )
 }
