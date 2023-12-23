@@ -14,12 +14,7 @@
 
 @font-face {
   font-family: 'Main';
-  src: url('./fonts/Euclid-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Second';
-  src: url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+  src: url('./assets/fonts/Euclid-Regular.ttf') format('truetype');
 }
 
 *{
