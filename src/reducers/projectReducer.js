@@ -184,6 +184,13 @@ export const projectReducer = createSlice({
             state.success = true,
             state.error = false,
             state.project = action.payload
+            state.projects = state.projects.map(project => {
+                if(project.id == action.payload.id){
+                    project = action.payload
+                }
+
+                return project
+            })
         })
         .addCase(update.rejected, (state, action) =>{
             state.loading = false,
