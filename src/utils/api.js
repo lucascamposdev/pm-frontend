@@ -1,3 +1,3 @@
-const api = 'https://beautiful-puce-dragonfly.cyclic.app/api'
+const api = 'https://project-manager-backend-production.up.railway.app/api'
 
 export default api;

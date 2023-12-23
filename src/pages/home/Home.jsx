@@ -36,11 +36,16 @@ const Home = () => {
         </div>
       </header>
 
-      {loading ? 
-        (<div className={styles.loading_container}><LoadingSpinner loading={loading} /></div>)
-      :
-        (
-      // List of Projects
+
+    {loading? 
+    <table>
+      <thead>
+        <tr>
+          <th>Carregando Projetos...</th>
+        </tr>
+      </thead>
+    </table>
+    :
       <table>
         <thead>
           <tr>
@@ -52,11 +57,11 @@ const Home = () => {
         <tbody>
           {projects.map(project => 
             (<ProjectRow key={project.id} project={project} />)
-          )}
+            )}
         </tbody>
       </table>
-        )
-      }
+          }
+      
     </div>
   )
 }
