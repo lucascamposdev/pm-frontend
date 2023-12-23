@@ -1,3 +1,3 @@
-const api = 'https://project-manager-backend-mauve.vercel.app/api'
+const api = 'https://project-manager-backend-production.up.railway.app/api'
 
 export default api;
