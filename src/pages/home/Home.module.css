@@ -9,7 +9,7 @@ header div{
     flex-wrap: wrap;
 }
 .title{
-    font-family: 'Second';
+    font-family: var(--second-font);
     color: var(--third-color);
 }
 .link{
