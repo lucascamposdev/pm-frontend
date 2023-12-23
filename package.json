@@ -2,6 +2,7 @@
   "name": "vite-project",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://project-manager-frontend-os5w7s29a-lucas-projects-bb10d7a1.vercel.app",
   "type": "module",
   "scripts": {
     "dev": "vite",
