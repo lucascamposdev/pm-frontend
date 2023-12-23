@@ -7,14 +7,16 @@
   --green-color: rgb(12, 171, 73);
   --red-color: red;
   --first-font-color: #FFFFFF;
-  --second-font: 'Libre Baskerville', serif;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Roboto:wght@100;300;400;700&display=swap');
 
 @font-face {
   font-family: 'Main';
   src: url('./assets/fonts/Euclid-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Second';
+  src: url('./assets/fonts/Libre-Regular.ttf') format('truetype');
 }
 
 *{
