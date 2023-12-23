@@ -1,3 +1,10 @@
+
+
+.container td{
+    transform-origin: top;
+    animation: openTable .50s ease forwards;
+}
+
 .thead tr th:first-child{
     width: 75px;
     text-align: center;
@@ -10,4 +17,15 @@
 .thead tr th:nth-child(4){
     width: 100px;
     text-align: center;
+}
+
+@keyframes openTable {
+    from{
+        opacity: 0;
+        transform: scaleY(0);
+    }
+    to{
+        opacity: 1;
+    }
+    
 }

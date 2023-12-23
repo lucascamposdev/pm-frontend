@@ -4,7 +4,6 @@ import styles from './ProjectPage.module.css'
 import ProjectInfo from '../../components/project/ProjectInfo/ProjectInfo';
 import ProjectHeader from '../../components/project/ProjectHeader/ProjectHeader';
 import CreateTask from '../../components/task/CreateTask/CreateTask';
-import Table from '../../components/shared/Table/Table';
 import LoadingSpinner from '../../components/shared/LoadingSpinner/LoadingSpinner';
 
 // Hooks
@@ -17,26 +16,19 @@ import { getProject } from '../../reducers/projectReducer';
 // Router
 import { useParams } from 'react-router-dom'
 
-import { allProjectTasks } from '../../reducers/taskReducer';
+import ProjectTasks from '../../components/project/ProjectTasks/ProjectTasks';
 
 const ProjectPage = () => {
 
   const { id } = useParams();
-  const { project } = useSelector(state => state.projectReducer)
+  const { project, loading } = useSelector(state => state.projectReducer)
   const { profile } = useSelector(state => state.userReducer)
-  const { task, tasks } = useSelector(state => state.taskReducer)
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProject(id))
   }, [])
-  
-  useEffect(() => {
-    if(project.id){
-      dispatch(allProjectTasks(project.id))
-    }
-  }, [project])
 
   if(!project.id || !profile){
     return (
@@ -54,7 +46,7 @@ const ProjectPage = () => {
 
         {profile && profile.id === project.userId ? <CreateTask/> : ''}
 
-        <Table task={task} tasks={tasks} isOwner={profile.id == project.userId}/>
+        <ProjectTasks project={project}/>  
     </main>
   )
 }

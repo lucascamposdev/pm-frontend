@@ -16,6 +16,7 @@ const UserSettings = () => {
   const { auth } = useSelector(state => state.authReducer)
   const { profile } = useSelector(state => state.userReducer)
   const { task } = useSelector(state => state.taskReducer)
+  const { projects } = useSelector(state => state.projectReducer)
   const dispatch = useDispatch();
 
   useEffect(() =>{
@@ -25,7 +26,7 @@ const UserSettings = () => {
 
   useEffect(() =>{
     dispatch(getuser(auth.id))
-  }, [task])
+  }, [task, projects])
 
     const [ dropdown, setDropdown ] = useState(false)
 

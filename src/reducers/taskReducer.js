@@ -136,7 +136,6 @@ export const taskReducer = createSlice({
     extraReducers: builder =>{
         builder
         .addCase(allProjectTasks.pending, (state) =>{
-            state.tasks = []
             state.loading = true,
             state.error = false,
             state.success = false
