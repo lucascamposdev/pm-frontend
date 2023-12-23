@@ -27,7 +27,8 @@ const UserSettings = () => {
   return (
     <section className={styles.user_settings}>
       <div id="settings-btn" className={`${styles.button} ${dropdown && styles['button_active']}`} onClick={() => setDropdown(prev => !prev)}>
-          {profile && profile.name} <i className="bi bi-caret-down-fill" ></i>
+          {profile && profile.name} 
+          <i className="bi bi-caret-down-fill" ></i>
       </div>
         <Dropdown isOpen={dropdown} closeDropdown={setDropdown} user={profile}/>
     </section>

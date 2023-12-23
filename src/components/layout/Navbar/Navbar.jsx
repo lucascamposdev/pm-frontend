@@ -1,4 +1,5 @@
 import styles from './Navbar.module.css'
+import Logo from '../../../assets/images/logo-green.svg';
 
 // Components
 import UserSettings from '../UserSettings/UserSettings';
@@ -10,7 +11,7 @@ const Navbar = () => {
   return (
     <nav>
         <Link to="/">
-          <img src="./assets/images/logo-green.svg" alt="Logo" className={styles.logo}/>
+          <img src={Logo} alt="Logo" className={styles.logo}/>
         </Link>
   
         <p className={styles.title}>| Project Manager</p>

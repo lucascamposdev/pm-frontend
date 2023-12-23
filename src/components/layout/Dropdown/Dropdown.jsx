@@ -37,7 +37,7 @@ const Dropdown = ({ isOpen, closeDropdown, user }) => {
   }; 
 
   if(!user){
-    return '...'
+    return ''
   }
 
   return (
