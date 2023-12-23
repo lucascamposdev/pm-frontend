@@ -16,17 +16,23 @@ const Tasks = () => {
 
   useEffect(() =>{
       dispatch(getuser(auth.id))
-  }, [task, profile])
-
-
-  if(!user){
-    return null
-  }
+  }, [task])
 
   return (
     <div className='page'>
       <h1 className={styles.title}>Suas Tasks</h1>
+      {user ? 
       <Table task={task} tasks={user.tasks}/>
+      :
+      <table>
+        <thead>
+
+        <tr>
+          <th>Carregando Tasks...</th>
+        </tr>
+        </thead>
+      </table>
+    }
       </div>
   )
 }
