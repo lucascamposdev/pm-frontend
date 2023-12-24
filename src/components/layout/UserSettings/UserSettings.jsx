@@ -20,13 +20,17 @@ const UserSettings = () => {
   const dispatch = useDispatch();
 
   useEffect(() =>{
-    dispatch(getprofile(auth.id))
-    dispatch(getProjects())
-  }, [])
+    if(auth){
+      dispatch(getprofile(auth.id))
+      dispatch(getProjects())
+    }
+  }, [auth])
 
   useEffect(() =>{
-    dispatch(getuser(auth.id))
-  }, [task, projects])
+    if(auth){
+      dispatch(getuser(auth.id))
+    }
+  }, [auth, task, projects])
 
     const [ dropdown, setDropdown ] = useState(false)
 

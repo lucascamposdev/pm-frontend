@@ -20,8 +20,10 @@ const ProjectInfo = ({ project }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getmanager(project.userId))      
-    }, [])
+        if(project){
+            dispatch(getmanager(project.userId))      
+        }
+    }, [project])
 
     return (
         <section className={styles.info_container}>

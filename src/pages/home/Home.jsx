@@ -17,6 +17,7 @@ import {Link} from 'react-router-dom'
 const Home = () => {
 
   const { projects, loading } = useSelector(state => state.projectReducer)
+  const { auth } = useSelector(state => state.authReducer)
 
   return (
     <div className='page'>
@@ -32,7 +33,7 @@ const Home = () => {
       </header>
 
 
-    {loading? 
+    {loading || !projects || !auth? 
     <table>
       <thead>
         <tr>

@@ -76,7 +76,7 @@ export const finalize = createAsyncThunk(
 
 const initialState = {
     projects: [],
-    project: {},
+    project: null,
     error: false,
     loading: false,
     success: false,
@@ -155,7 +155,7 @@ export const projectReducer = createSlice({
         .addCase(deleteProject.fulfilled, (state, action) =>{
             state.loading = false,
             state.error = false,
-            state.project = []
+            state.project = null
             state.projects = state.projects.filter(project => project.id != action.payload)
         })
         .addCase(finalize.fulfilled, (state, action) =>{
