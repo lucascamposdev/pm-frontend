@@ -24,6 +24,7 @@ const ProjectPage = () => {
   const { profile } = useSelector(state => state.userReducer)
   const { project, projects } = useSelector(state => state.projectReducer)
   const dispatch = useDispatch()
+  
   const selectedProject = projects.find(project => project.id == id)
 
   useEffect(() => {
@@ -45,6 +46,7 @@ const ProjectPage = () => {
         <ProjectInfo project={project} />
 
         {profile && profile.id === project.userId ? <CreateTask/> : ''}
+        
         { selectedProject.id == project.id &&
         <ProjectTasks project={project}/>  
         }
