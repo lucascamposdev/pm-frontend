@@ -96,24 +96,7 @@ const deleteProject = async(id, token) =>{
     }
 }
 
-const createTask = async(payload, id, token) =>{
 
-    const config = requestConfig("POST", payload, token)
-    try{
-        const res = await fetch(api + `/tasks/${id}`, config);
-        const data = await res.json();
-
-        if(!res.ok){
-            data.error = true
-            return data
-        }
-        
-        return data.project
-    }
-    catch(err){
-        console.log('Erro ao realizar requisição')
-    }
-}
 
 const finalize = async(id, token) =>{
 
@@ -140,7 +123,6 @@ const projectService = {
     create,
     update,
     deleteProject,
-    createTask,
     finalize
 }
 

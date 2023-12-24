@@ -2,13 +2,10 @@ import styles from './Tasks.module.css'
 
 // Components
 import Table from '../../components/shared/Table/Table'
+import NoTasks from '../../components/shared/NoTasks/NoTasks'
 
 // Hooks
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-
-// Reducer
-import { getuser } from '../../reducers/userReducer'
+import { useSelector } from 'react-redux'
 
 const Tasks = () => {
   const { user } = useSelector(state => state.userReducer)
@@ -18,11 +15,13 @@ const Tasks = () => {
     <div className='page'>
       <h1 className={styles.title}>Suas Tasks</h1>
       {user ? 
-      <Table task={task} tasks={user.tasks}/>
+      <>
+        <Table task={task} tasks={user.tasks}/>
+        {user.tasks.length === 0 && <NoTasks/>}
+      </>
       :
       <table>
         <thead>
-
         <tr>
           <th>Carregando Tasks...</th>
         </tr>

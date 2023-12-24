@@ -3,6 +3,7 @@ import styles from './CreateTask.module.css'
 // Components
 import LoadingButton from '../../shared/LoadingButton/LoadingButton'
 import FormMessage from '../../shared/FormMessage/FormMessage'
+import Modal from '../../shared/Modal/Modal'
 
 // Functions
 import capitalizeInput from '../../../functions/capitalizeInput'
@@ -12,14 +13,14 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // Reducer
-import { createTask, resetStates } from '../../../reducers/projectReducer'
-import Modal from '../../shared/Modal/Modal'
+import { createTask, resetStates } from '../../../reducers/taskReducer'
 
 const CreateTask = () => {
 
     const dispatch = useDispatch();
 
-    const { project, loading, error, success } = useSelector(state => state.projectReducer)
+    const { project } = useSelector(state => state.projectReducer)
+    const { minorLoading: loading, error, minorSuccess: success } = useSelector(state => state.taskReducer)
 
     const [taskName, setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');

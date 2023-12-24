@@ -112,6 +112,23 @@ export const deleteTask = createAsyncThunk(
     }
 )
 
+export const createTask = createAsyncThunk(
+    "projects/createTask",
+    async(payloadWithId, thunkAPI) =>{
+        const { id, ...payload } = payloadWithId;
+
+        const token = await thunkAPI.getState().authReducer.auth.token
+        const data = await taskService.createTask(payload, id, token)
+
+        // Check Errors
+        if(data.error){
+            return thunkAPI.rejectWithValue(data.message)
+        }
+        console.log(data)
+        return data
+    }
+)
+
 const initialState = {
     tasks: [],
     task: {},
@@ -120,6 +137,7 @@ const initialState = {
     error: false,
     loading: false,
     minorLoading: false,
+    minorSuccess: false,
     success: false
 }
 
@@ -130,7 +148,9 @@ export const taskReducer = createSlice({
         resetStates: (state) =>{
             state.loading = false,
             state.error = false,
-            state.success = false
+            state.success = false,
+            state.minorLoading = false,
+            state.minorSuccess = false
         }
     },
     extraReducers: builder =>{
@@ -152,15 +172,31 @@ export const taskReducer = createSlice({
             state.error = action.payload
         })
         .addCase(getTask.pending, (state) =>{
-            state.loading = true,
+            state.minorLoading = true,
             state.error = false,
             state.success = false
         })
         .addCase(getTask.fulfilled, (state, action) =>{
-            state.loading = false,
+            state.minorLoading = false,
             state.success = true,
             state.error = false,
             state.task = action.payload
+        })
+        .addCase(createTask.pending, (state) =>{
+            state.minorLoading = true,
+            state.error = false,
+            state.minorSuccess = false
+        })
+        .addCase(createTask.fulfilled, (state, action) =>{
+            state.minorLoading = false,
+            state.minorSuccess = true,
+            state.error = false,
+            state.tasks.push(action.payload)
+        })
+        .addCase(createTask.rejected, (state, action) =>{
+            state.minorLoading = false,
+            state.minorSuccess = false,
+            state.error = action.payload
         })
         .addCase(getResponsable.pending, (state) =>{
             state.minorLoading = true,

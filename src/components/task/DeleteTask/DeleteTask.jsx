@@ -9,7 +9,6 @@ const DeleteTask = ({ id }) => {
     const dispatch = useDispatch();
 
     const handleDelete = () =>{
-        console.log('delete')
 
         dispatch(deleteTask(id))
     }

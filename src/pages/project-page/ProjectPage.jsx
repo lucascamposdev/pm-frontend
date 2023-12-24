@@ -7,11 +7,11 @@ import CreateTask from '../../components/task/CreateTask/CreateTask';
 import LoadingSpinner from '../../components/shared/LoadingSpinner/LoadingSpinner';
 
 // Hooks
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 // Reducer
 import { useDispatch, useSelector } from 'react-redux';
-import { getProject } from '../../reducers/projectReducer';
+import { setProject } from '../../reducers/projectReducer'
 
 // Router
 import { useParams } from 'react-router-dom'
@@ -21,16 +21,16 @@ import ProjectTasks from '../../components/project/ProjectTasks/ProjectTasks';
 const ProjectPage = () => {
 
   const { id } = useParams();
-  const { project, loading } = useSelector(state => state.projectReducer)
   const { profile } = useSelector(state => state.userReducer)
-
-  const dispatch = useDispatch();
+  const { project, projects } = useSelector(state => state.projectReducer)
+  const dispatch = useDispatch()
+  const selectedProject = projects.find(project => project.id == id)
 
   useEffect(() => {
-    dispatch(getProject(id))
-  }, [])
+    dispatch(setProject(selectedProject))
+  }, [projects])
 
-  if(!project.id || !profile){
+  if(!project || !profile){
     return (
       <main className="page">
         <LoadingSpinner/>
@@ -45,8 +45,10 @@ const ProjectPage = () => {
         <ProjectInfo project={project} />
 
         {profile && profile.id === project.userId ? <CreateTask/> : ''}
-
+        { selectedProject.id == project.id &&
         <ProjectTasks project={project}/>  
+        }
+       
     </main>
   )
 }

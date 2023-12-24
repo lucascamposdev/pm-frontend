@@ -3,6 +3,7 @@ import styles from './NewProject.module.css'
 
 // Components
 import FormMessage from '../../components/shared/FormMessage/FormMessage';
+import LoadingButton from '../../components/shared/LoadingButton/LoadingButton';
 
 // Functions
 import capitalizeInput from '../../functions/capitalizeInput';
@@ -16,7 +17,7 @@ import { useEffect } from 'react';
 const NewProject = () => {
 
   const dispatch = useDispatch();
-  const { error, success } = useSelector(state => state.projectReducer)
+  const { error, success, loading } = useSelector(state => state.projectReducer)
 
   const handleSubmit = (e) =>{
     e.preventDefault();
@@ -56,7 +57,7 @@ const NewProject = () => {
         <label>Cliente:</label>
         <input type="text" name='client'/>
 
-        <button className='page-button'>Criar Projeto</button>
+        <LoadingButton name={'Criar Projeto'} loading={loading} />
 
         {error && error.map((msg, i) => <FormMessage key={i} message={msg} type='error'/>)}
         {success && <FormMessage message={['Projeto criado com sucesso.']} type='success'/>}

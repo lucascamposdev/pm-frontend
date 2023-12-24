@@ -15,20 +15,6 @@ export const getProjects = createAsyncThunk(
     }
 )
 
-export const getProject = createAsyncThunk(
-    "projects/getproject",
-    async(id, thunkAPI) =>{
-        const token = await thunkAPI.getState().authReducer.auth.token
-        const data = await projectService.getProject(id, token)
-
-        // Check Errors
-        if(data.error){
-            return thunkAPI.rejectWithValue(data.message)
-        }
-        return data
-    }
-)
-
 export const create = createAsyncThunk(
     "projects/create",
     async(payload, thunkAPI) =>{
@@ -74,22 +60,6 @@ export const deleteProject = createAsyncThunk(
     }
 )
 
-export const createTask = createAsyncThunk(
-    "projects/createTask",
-    async(payloadWithId, thunkAPI) =>{
-        const { id, ...payload } = payloadWithId;
-
-        const token = await thunkAPI.getState().authReducer.auth.token
-        const data = await projectService.createTask(payload, id, token)
-
-        // Check Errors
-        if(data.error){
-            return thunkAPI.rejectWithValue(data.message)
-        }
-        return data
-    }
-)
-
 export const finalize = createAsyncThunk(
     "projects/finalize",
     async(id, thunkAPI) =>{
@@ -120,6 +90,9 @@ export const projectReducer = createSlice({
             state.loading = false,
             state.error = false,
             state.success = false
+        },
+        setProject: (state, action) =>{
+            state.project = action.payload
         }
     },
     extraReducers: builder =>{
@@ -131,7 +104,6 @@ export const projectReducer = createSlice({
         })
         .addCase(getProjects.fulfilled, (state, action) =>{
             state.loading = false,
-            state.success = true,
             state.error = false,
             state.projects = action.payload
         })
@@ -157,23 +129,6 @@ export const projectReducer = createSlice({
             state.success = false,
             state.error = action.payload
         })
-        .addCase(getProject.pending, (state) =>{
-            state.project = {}
-            state.loading = true,
-            state.error = false,
-            state.success = false
-        })
-        .addCase(getProject.fulfilled, (state, action) =>{
-            state.loading = false,
-            state.error = false,
-            state.project = action.payload
-        })
-        .addCase(getProject.rejected, (state, action) =>{
-            state.loading = false,
-            state.success = false,
-            state.error = action.payload
-            state.project = {}
-        })
         .addCase(update.pending, (state) =>{
             state.loading = true,
             state.error = false,
@@ -197,22 +152,6 @@ export const projectReducer = createSlice({
             state.success = false,
             state.error = action.payload
         })
-        .addCase(createTask.pending, (state) =>{
-            state.loading = true,
-            state.error = false,
-            state.success = false
-        })
-        .addCase(createTask.fulfilled, (state, action) =>{
-            state.loading = false,
-            state.success = true,
-            state.error = false,
-            state.project.tasks.push(action.payload)
-        })
-        .addCase(createTask.rejected, (state, action) =>{
-            state.loading = false,
-            state.success = false,
-            state.error = action.payload
-        })
         .addCase(deleteProject.fulfilled, (state, action) =>{
             state.loading = false,
             state.error = false,
@@ -227,5 +166,5 @@ export const projectReducer = createSlice({
     }
 })
 
-export const { resetStates } = projectReducer.actions
+export const { resetStates, setProject } = projectReducer.actions
 export default projectReducer.reducer
