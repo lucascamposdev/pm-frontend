@@ -19,7 +19,7 @@ const ProjectTasks = ({ project }) => {
         return <table>
                 <thead>
                     <tr>
-                        <th>Carregando...</th>
+                        <th>Carregando Tasks...</th>
                     </tr>
                 </thead>
             </table>

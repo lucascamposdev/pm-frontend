@@ -2,7 +2,7 @@
 
 .container td{
     transform-origin: top;
-    animation: openTable .50s ease forwards;
+    animation: openTable .30s ease forwards;
 }
 
 .thead tr th:first-child{
@@ -22,7 +22,6 @@
 @keyframes openTable {
     from{
         opacity: 0;
-        transform: scaleY(0);
     }
     to{
         opacity: 1;
