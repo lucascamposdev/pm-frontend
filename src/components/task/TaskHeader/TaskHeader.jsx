@@ -4,19 +4,17 @@ import { taskBelongsTo } from "../../../reducers/taskReducer";
 
 const TaskHeader = () => {
 
-    const { task, projectName } = useSelector(state => state.taskReducer)
+    const { task, projectName, nameLoading } = useSelector(state => state.taskReducer)
     const dispatch = useDispatch();
 
     useEffect(() =>{
-      if(task.name){
         dispatch(taskBelongsTo(task.projectId))
-      }
     }, [task])
 
   return (
     <>
     <p>Projeto</p>
-    <h2>{projectName}</h2>
+    <h2>{nameLoading ? 'Carregando...' : projectName}</h2>
     </>
   )
 }

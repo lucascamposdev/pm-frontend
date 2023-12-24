@@ -136,6 +136,7 @@ const initialState = {
     error: false,
     loading: false,
     minorLoading: false,
+    nameLoading: false,
     minorSuccess: false,
     success: false
 }
@@ -149,6 +150,7 @@ export const taskReducer = createSlice({
             state.error = false,
             state.success = false,
             state.minorLoading = false,
+            state.nameLoading = false,
             state.minorSuccess = false
         },
         setTask: (state, action) =>{
@@ -247,11 +249,12 @@ export const taskReducer = createSlice({
             state.task = {}
         })
         .addCase(taskBelongsTo.pending, (state) =>{
+            state.nameLoading = true,
             state.error = false,
             state.success = false
         })
         .addCase(taskBelongsTo.fulfilled, (state, action) =>{
-            state.loading = false,
+            state.nameLoading = false,
             state.success = true,
             state.error = false,
             state.projectName = action.payload
