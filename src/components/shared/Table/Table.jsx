@@ -6,11 +6,11 @@ import TaskRow from '../../task/TaskRow/TaskRow'
 import TaskInfo from '../../task/TaskInfo/TaskInfo'
 
 // Hooks
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 
 // Reducer
-import { getTask } from '../../../reducers/taskReducer'
+import { setTask } from '../../../reducers/taskReducer'
 
 const Table = ({ task, tasks, isOwner }) => {
 
@@ -23,7 +23,8 @@ const Table = ({ task, tasks, isOwner }) => {
   }
 
   const openModal = (id) => {
-    dispatch(getTask(id))
+    const selectedTask = tasks.find(task => task.id == id)
+    dispatch(setTask(selectedTask))
     setOpenTask(true)
   }
 

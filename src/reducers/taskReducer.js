@@ -124,7 +124,6 @@ export const createTask = createAsyncThunk(
         if(data.error){
             return thunkAPI.rejectWithValue(data.message)
         }
-        console.log(data)
         return data
     }
 )
@@ -151,6 +150,9 @@ export const taskReducer = createSlice({
             state.success = false,
             state.minorLoading = false,
             state.minorSuccess = false
+        },
+        setTask: (state, action) =>{
+            state.task = action.payload
         }
     },
     extraReducers: builder =>{
@@ -170,17 +172,6 @@ export const taskReducer = createSlice({
             state.loading = false,
             state.success = false,
             state.error = action.payload
-        })
-        .addCase(getTask.pending, (state) =>{
-            state.minorLoading = true,
-            state.error = false,
-            state.success = false
-        })
-        .addCase(getTask.fulfilled, (state, action) =>{
-            state.minorLoading = false,
-            state.success = true,
-            state.error = false,
-            state.task = action.payload
         })
         .addCase(createTask.pending, (state) =>{
             state.minorLoading = true,
@@ -268,5 +259,5 @@ export const taskReducer = createSlice({
     }
 })
 
-export const { resetStates } = taskReducer.actions
+export const { resetStates, setTask } = taskReducer.actions
 export default taskReducer.reducer

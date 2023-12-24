@@ -3,7 +3,6 @@ import styles from './TaskRow.module.css'
 // Functions
 import formatDate from '../../../functions/formatDate'
 import DeleteTask from '../DeleteTask/DeleteTask'
-import { useSelector } from 'react-redux'
 
 const TaskRow = ({ task, openModal, isOwner }) => {
   return (
