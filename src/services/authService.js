@@ -13,7 +13,7 @@ const register = async(payload) =>{
             return data
         }
         
-        localStorage.setItem("auth", JSON.stringify(data))
+        sessionStorage.setItem("auth", JSON.stringify(data))
         return data
     }
     catch(err){
@@ -32,7 +32,7 @@ const login = async(payload) =>{
             data.error = true
             return data
         }
-        localStorage.setItem("auth", JSON.stringify(data))
+        sessionStorage.setItem("auth", JSON.stringify(data))
         return data
     }
     catch(err){
@@ -41,7 +41,7 @@ const login = async(payload) =>{
 }
 
 const logout = async() =>{
-    localStorage.removeItem('auth');
+    sessionStorage.removeItem('auth');
 }
 
 const authService = {

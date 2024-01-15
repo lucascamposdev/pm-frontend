@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "../services/authService";
 
-const storageUser = await JSON.parse(localStorage.getItem("auth"))
+const sessionUser = await JSON.parse(sessionStorage.getItem("auth"))
 
 export const register = createAsyncThunk(
     "auth/register",
@@ -39,7 +39,7 @@ export const logout = createAsyncThunk(
 )
 
 const initialState = {
-    auth: storageUser ? storageUser : null,
+    auth: sessionUser ? sessionUser : null,
     error: false,
     loading: false,
     success: false
