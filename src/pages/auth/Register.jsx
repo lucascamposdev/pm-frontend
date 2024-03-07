@@ -1,11 +1,17 @@
-import styles from './Auth.module.css'
+import * as React from 'react';
+import * as S from './styles';
 
-// Components
-import LoadingButton from '../../components/shared/LoadingButton/LoadingButton'
-import FormMessage from '../../components/shared/FormMessage/FormMessage'
+// Material Ui
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 
 // Functions
-import capitalizeInput from '../../functions/capitalizeInput'
+import capitalizeInput from '@utils/capitalizeInput'
 
 // Hooks
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,56 +20,120 @@ import { useEffect } from 'react'
 // Reducer
 import { register, resetStates } from '../../reducers/authReducer'
 
-// Utils
-import { Link } from 'react-router-dom'
+
 
 const Register = () => {
 
-  const dispatch = useDispatch();
-  const { loading, error } = useSelector(state => state.authReducer)
-
-  const handleSubmit = (e) =>{
-    e.preventDefault();
-
-    const formData = new FormData(e.target)
-    const payload = Object.fromEntries(formData)
-
-    for (const [key, value] of Object.entries(payload)) {
-      if (typeof value === 'string' && key == 'name') {
-        payload[key] = capitalizeInput(value);
+    const dispatch = useDispatch();
+    const { loading } = useSelector(state => state.authReducer)
+  
+    const handleSubmit = (e) =>{
+      e.preventDefault();
+  
+      const formData = new FormData(e.target)
+      const payload = Object.fromEntries(formData)
+  
+      for (const [key, value] of Object.entries(payload)) {
+        if (typeof value === 'string' && key == 'name' || key == 'lastName') {
+          payload[key] = capitalizeInput(value);
+        }
       }
+  
+      dispatch(register(payload))
     }
-
-    dispatch(register(payload))
-  }
-
-  useEffect(() =>{
-    dispatch(resetStates())
-  }, [])
+  
+    useEffect(() =>{
+      dispatch(resetStates())
+    }, [])
+  
 
   return (
-    <div className={styles.container}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+sx={{ display: 'flex',  flexDirection: 'column',alignItems: 'center', justifyContent: 'center', height: '100%'}}
+        >
+          <S.Title component="h1" variant="h5">
+            Crie uma conta
+          </S.Title>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  name="name"
+                  required
+                  fullWidth
+                  id="name"
+                  label="Nome"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Sobrenome"
+                  name="lastName"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email"
+                  name="email"
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Senha"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                />
+              </Grid>
 
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <h1 className={styles.title}>Crie uma conta</h1>
-          <p className={styles.subtitle}>Veja tudo o que Presto Project Manager pode oferecer a sua equipe gratuitamente</p>
-          <input type="text" placeholder='Nome' name='name' autoComplete='off'/>
-          <input type="email" placeholder='Email' name='email' autoComplete='off'/>
-          <input type="password" placeholder='Senha' name='password' />
-          <input type="password" placeholder='Confirme a senha' name='confirmPassword'/>
-          <LoadingButton name="Criar Conta" loading={loading}/>
-
-          {/* Error Messages */}
-          {error ? error.map((errorMsg, index) => <FormMessage key={index} message={errorMsg} type='error'/>): ""}
-          
-          <span>
-            Já possui uma conta?  <Link to='/login' className={styles.link}>Fazer Login</Link>
-          </span>
-        </form>
-
-      <footer>© 2023 Presto, Dev.</footer>
-    </div>
-  )
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="confirmPassword"
+                  label="Confirmar Senha"
+                  type="password"
+                  id="confirmPassword"
+                  autoComplete="new-password"
+                />
+              </Grid>
+            </Grid>
+            <S.StyledButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              disabled={loading ? true : false}
+              >
+                {loading ? 'Carregando' : 'Cadastrar'}
+            </S.StyledButton>
+            <Grid container justifyContent="flex-end">
+              <Grid item sx={{ textAlign: 'center', width: '100%'}}>
+                <S.StyledLink to='/login'>
+                  Já possui uma conta? Faça o <u>Login</u> 
+                </S.StyledLink>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        <S.Copyright>© 2024, Developed by /Lucas Campos.</S.Copyright>
+      </Container>
+  );
 }
 
-export default Register
+export default Register;

@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "../services/authService";
 
+import { toast } from "react-toastify";
+
 const sessionUser = await JSON.parse(sessionStorage.getItem("auth"))
 
 export const register = createAsyncThunk(
@@ -10,6 +12,7 @@ export const register = createAsyncThunk(
 
         // Check Errors
         if(data.error){
+            data.message.map(msg => toast.error(msg))
             return thunkAPI.rejectWithValue(data.message)
         }
 
@@ -24,6 +27,7 @@ export const login = createAsyncThunk(
 
         // Check Errors
         if(data.error){
+            data.message.map(msg => toast.error(msg))
             return thunkAPI.rejectWithValue(data.message)
         }
 

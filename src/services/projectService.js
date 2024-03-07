@@ -20,7 +20,7 @@ const getProjects = async(token) =>{
     }
 }
 
-const getProject = async(id, token) =>{
+const getProjectById = async(id, token) =>{
 
     const config = requestConfig("GET", null, token)
     try{
@@ -40,8 +40,8 @@ const getProject = async(id, token) =>{
 }
 
 const create = async(payload, token) =>{
-
     const config = requestConfig("POST", payload, token)
+
     try{
         const res = await fetch(api + '/projects', config);
         const data = await res.json();
@@ -117,13 +117,33 @@ const finalize = async(id, token) =>{
     }
 }
 
+const allProjectTasks = async(id, token) =>{
+
+    const config = requestConfig("GET", null, token)
+    try{
+        const res = await fetch(api + '/projects/tasks/' + id, config);
+        const data = await res.json();
+
+        if(!res.ok){
+            data.error = true
+            return data
+        }
+        
+        return data.project
+    }
+    catch(err){
+        console.log('Erro ao realizar requisição')
+    }
+}
+
 const projectService = {
     getProjects,
-    getProject,
+    getProjectById,
     create,
     update,
     deleteProject,
-    finalize
+    finalize,
+    allProjectTasks,
 }
 
 export default projectService

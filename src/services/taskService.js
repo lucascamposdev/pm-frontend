@@ -1,24 +1,7 @@
 import api from '../utils/api.js'
 import requestConfig from '../utils/requestConfig.js'
 
-const allProjectTasks = async(id, token) =>{
 
-    const config = requestConfig("GET", null, token)
-    try{
-        const res = await fetch(api + '/projects/tasks/' + id, config);
-        const data = await res.json();
-
-        if(!res.ok){
-            data.error = true
-            return data
-        }
-        
-        return data.project
-    }
-    catch(err){
-        console.log('Erro ao realizar requisição')
-    }
-}
 
 const getTask = async(id, token) =>{
 
@@ -77,11 +60,50 @@ const applyTask = async(id, token) =>{
     }
 }
 
-const finalize = async(id, token) =>{
+const leaveTask = async(id, token) =>{
 
     const config = requestConfig("PATCH", null, token)
     try{
-        const res = await fetch(api + '/tasks/finalize/' + id, config);
+        const res = await fetch(api + '/tasks/leave/' + id, config);
+        const data = await res.json();
+
+        if(!res.ok){
+            data.error = true
+            return data
+        }
+        
+        return data.project
+    }
+    catch(err){
+        console.log('Erro ao realizar requisição')
+    }
+}
+
+const changeTaskStatus = async(payload, token) =>{
+
+    const { id } = payload
+    const config = requestConfig("PATCH", payload, token)
+    try{
+        const res = await fetch(api + '/tasks/change/' + id, config);
+        const data = await res.json();
+
+        if(!res.ok){
+            data.error = true
+            return data
+        }
+        
+        return data.project
+    }
+    catch(err){
+        console.log('Erro ao realizar requisição')
+    }
+}
+
+const update = async(id, payload, token) =>{
+
+    const config = requestConfig("PATCH", payload, token)
+    try{
+        const res = await fetch(api + '/tasks/update/' + id, config);
         const data = await res.json();
 
         if(!res.ok){
@@ -116,12 +138,13 @@ const deleteTask = async(id, token) =>{
 }
 
 const taskService = {
-    allProjectTasks,
     getTask,
     createTask,
     applyTask,
-    finalize,
-    deleteTask
+    leaveTask,
+    changeTaskStatus,
+    deleteTask,
+    update
 }
 
 export default taskService

@@ -1,5 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import projectService from "../services/projectService";
+import userService from "../services/userService";
+
+import { toast } from "react-toastify";
 
 export const getProjects = createAsyncThunk(
     "projects/getprojects",
@@ -15,6 +18,23 @@ export const getProjects = createAsyncThunk(
     }
 )
 
+export const getProjectById = createAsyncThunk(
+    "projects/getprojectbyid",
+    async(id, thunkAPI) =>{
+        const token = await thunkAPI.getState().authReducer.auth.token
+        const data = await projectService.getProjectById(id, token)
+
+
+        // Check Errors
+        if(data.error){
+
+            return thunkAPI.rejectWithValue(data.message)
+        }
+
+        return data
+    }
+)
+
 export const create = createAsyncThunk(
     "projects/create",
     async(payload, thunkAPI) =>{
@@ -23,8 +43,10 @@ export const create = createAsyncThunk(
 
         // Check Errors
         if(data.error){
+            toast.error(data.message[0])
             return thunkAPI.rejectWithValue(data.message)
         }
+        toast.success('Projeto criado com sucesso!')
         return data
     }
 )
@@ -39,8 +61,10 @@ export const update = createAsyncThunk(
 
         // Check Errors
         if(data.error){
+            toast.error(data.message[0])
             return thunkAPI.rejectWithValue(data.message)
         }
+        toast.success('Alterações Salvas!', { autoClose: 750 })
         return data
     }
 )
@@ -74,11 +98,29 @@ export const finalize = createAsyncThunk(
     }
 )
 
+export const getProjectAdmin = createAsyncThunk(
+    "projects/getProjectAdmin",
+    async(id, thunkAPI) =>{
+        const token = await thunkAPI.getState().authReducer.auth.token
+        const data = await userService.getprofile(id, token)
+
+        // Check Errors
+        if(data.error){
+            return thunkAPI.rejectWithValue(data.message)
+        }
+
+        return data
+    }
+)
+
 const initialState = {
     projects: [],
     project: null,
+    isAdmin: false,
+    admin: null,
     error: false,
     loading: false,
+    minorLoading: false,
     success: false,
 }
 
@@ -90,9 +132,6 @@ export const projectReducer = createSlice({
             state.loading = false,
             state.error = false,
             state.success = false
-        },
-        setProject: (state, action) =>{
-            state.project = action.payload
         }
     },
     extraReducers: builder =>{
@@ -110,22 +149,38 @@ export const projectReducer = createSlice({
         .addCase(getProjects.rejected, (state, action) =>{
             state.loading = false,
             state.success = false,
-            state.error = action.payload
+            state.error = action.payload,
             state.projects = []
         })
-        .addCase(create.pending, (state) =>{
+        .addCase(getProjectById.pending, (state) =>{
+            state.project = null,
             state.loading = true,
+            state.error = false
+        })
+        .addCase(getProjectById.fulfilled, (state, action) =>{
+            state.loading = false,
+            state.error = false,
+            state.project = action.payload
+        })
+        .addCase(getProjectById.rejected, (state, action) =>{
+            state.loading = false,
+            state.success = false,
+            state.error = action.payload
+            state.project = null
+        })
+        .addCase(create.pending, (state) =>{
+            state.minorLoading = true,
             state.error = false,
             state.success = false
         })
         .addCase(create.fulfilled, (state, action) =>{
-            state.loading = false,
+            state.minorLoading = false,
             state.success = true,
             state.error = false,
             state.projects.push(action.payload)
         })
         .addCase(create.rejected, (state, action) =>{
-            state.loading = false,
+            state.minorLoading = false,
             state.success = false,
             state.error = action.payload
         })
@@ -139,32 +194,30 @@ export const projectReducer = createSlice({
             state.success = true,
             state.error = false,
             state.project = action.payload
-            state.projects = state.projects.map(project => {
-                if(project.id == action.payload.id){
-                    project = action.payload
-                }
-
-                return project
-            })
         })
         .addCase(update.rejected, (state, action) =>{
-            state.loading = false,
-            state.success = false,
-            state.error = action.payload
+            state.loading = false
         })
         .addCase(deleteProject.fulfilled, (state, action) =>{
             state.loading = false,
             state.error = false,
-            state.project = null
-            state.projects = state.projects.filter(project => project.id != action.payload)
+            state.project = null,
+            console.log(action.payload),
+            state.projects = state.projects.filter(p => p.id != action.payload)
         })
         .addCase(finalize.fulfilled, (state, action) =>{
             state.loading = false,
             state.error = false,
             state.project.status = action.payload.status
         })
+
+        .addCase(getProjectAdmin.fulfilled, (state, action) =>{
+            state.loading = false,
+            state.error = false,
+            state.admin = action.payload
+        })
     }
 })
 
-export const { resetStates, setProject } = projectReducer.actions
+export const { resetStates } = projectReducer.actions
 export default projectReducer.reducer

@@ -1,41 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
+// Services
 import taskService from "../services/taskService";
 import userService from '../services/userService'
 import projectService from "../services/projectService";
 
-export const allProjectTasks = createAsyncThunk(
-    "task/allProjectTasks",
-    async(projectId, thunkAPI) =>{
-        const token = await thunkAPI.getState().authReducer.auth.token
-        const data = await taskService.allProjectTasks(projectId, token)
-
-        // Check Errors
-        if(data.error){
-            return thunkAPI.rejectWithValue(data.message)
-        }
-
-        return data
-    }
-)
-
-export const getResponsable = createAsyncThunk(
-    "task/getResponsable",
-    async(userId, thunkAPI) =>{
-
-        if(!userId){
-            return null
-        }
-
-        const token = await thunkAPI.getState().authReducer.auth.token
-        const data = await userService.getprofile(userId, token)
-
-        // Check Errors
-        if(data.error){
-            return thunkAPI.rejectWithValue(data.message)
-        }
-        return data.name
-    }
-)
+// Toast
+import { toast } from "react-toastify";
 
 export const applyTask = createAsyncThunk(
     "task/applyTask",
@@ -52,11 +23,26 @@ export const applyTask = createAsyncThunk(
     }
 )
 
-export const finalize = createAsyncThunk(
-    "task/finalize",
+export const leaveTask = createAsyncThunk(
+    "task/leaveTask",
     async(taskId, thunkAPI) =>{
         const token = await thunkAPI.getState().authReducer.auth.token
-        const data = await taskService.finalize(taskId, token)
+        const data = await taskService.leaveTask(taskId, token)
+
+        // Check Errors
+        if(data.error){
+            return thunkAPI.rejectWithValue(data.message)
+        }
+
+        return data
+    }
+)
+
+export const changeTaskStatus = createAsyncThunk(
+    "task/changeTaskStatus",
+    async(payload, thunkAPI) =>{
+        const token = await thunkAPI.getState().authReducer.auth.token
+        const data = await taskService.changeTaskStatus(payload, token)
 
         // Check Errors
         if(data.error){
@@ -82,21 +68,6 @@ export const getTask = createAsyncThunk(
     }
 )
 
-export const taskBelongsTo = createAsyncThunk(
-    "task/taskBelongsTo",
-    async(projectId, thunkAPI) =>{
-        const token = await thunkAPI.getState().authReducer.auth.token
-        const data = await projectService.getProject(projectId, token)
-
-        // Check Errors
-        if(data.error){
-            return thunkAPI.rejectWithValue(data.message)
-        }
-
-        return data.name
-    }
-)
-
 export const deleteTask = createAsyncThunk(
     "task/deleteTask",
     async(taskId, thunkAPI) =>{
@@ -105,15 +76,16 @@ export const deleteTask = createAsyncThunk(
 
         // Check Errors
         if(data.error){
+            toast.error(data.message[0])
             return thunkAPI.rejectWithValue(data.message)
         }
-
+        toast.success('Task excluída.')
         return data
     }
 )
 
 export const createTask = createAsyncThunk(
-    "projects/createTask",
+    "task/createTask",
     async(payloadWithId, thunkAPI) =>{
         const { id, ...payload } = payloadWithId;
 
@@ -122,15 +94,48 @@ export const createTask = createAsyncThunk(
 
         // Check Errors
         if(data.error){
+            toast.error(data.message[0])
             return thunkAPI.rejectWithValue(data.message)
         }
+        toast.success('Task criada com sucesso!')
+        return data
+    }
+)
+
+export const updateTask = createAsyncThunk(
+    "task/updateTask",
+    async(payloadWithId, thunkAPI) =>{
+        const { id, ...payload } = payloadWithId;
+        const token = await thunkAPI.getState().authReducer.auth.token
+        const data = await taskService.update(id, payload, token)
+
+        // Check Errors
+        if(data.error){
+            return thunkAPI.rejectWithValue(data.message)
+        }
+
+        return data
+    }
+)
+
+export const allProjectTasks = createAsyncThunk(
+    "task/allprojecttasks",
+    async(projectId, thunkAPI) =>{
+        const token = await thunkAPI.getState().authReducer.auth.token
+        const data = await projectService.allProjectTasks(projectId, token)
+
+        // Check Errors
+        if(data.error){
+            return thunkAPI.rejectWithValue(data.message)
+        }
+
         return data
     }
 )
 
 const initialState = {
     tasks: [],
-    task: {},
+    task: null,
     projectName: null,
     responsable: null,
     error: false,
@@ -142,7 +147,7 @@ const initialState = {
 }
 
 export const taskReducer = createSlice({
-    name: 'responsables',
+    name: 'task',
     initialState,
     reducers:{
         resetStates: (state) =>{
@@ -155,112 +160,60 @@ export const taskReducer = createSlice({
         },
         setTask: (state, action) =>{
             state.task = action.payload
+        },
+        resetTasks: (state) =>{
+            state.tasks = []
+        },
+        changeTasksLocally: (state, action) =>{
+            state.tasks = state.tasks.filter(t => t.id != action.payload.id)
+            state.tasks.push(action.payload)
+        },
+        updateTasksLocally: (state, action) =>{
+            state.tasks = state.tasks.map(task => { 
+                if(task.id === action.payload.id){
+                    return action.payload;
+                }
+                return task;
+            })
         }
     },
     extraReducers: builder =>{
         builder
+        .addCase(getTask.pending, (state) =>{
+            state.minorLoading = true
+        })
+        .addCase(getTask.fulfilled, (state, action) =>{
+            state.minorLoading = false,
+            state.task = action.payload
+        })
         .addCase(allProjectTasks.pending, (state) =>{
-            state.loading = true,
-            state.error = false,
-            state.success = false
+            state.loading = true
         })
         .addCase(allProjectTasks.fulfilled, (state, action) =>{
             state.loading = false,
-            state.success = true,
-            state.error = false,
             state.tasks = action.payload
-        })
-        .addCase(allProjectTasks.rejected, (state, action) =>{
-            state.loading = false,
-            state.success = false,
-            state.error = action.payload
         })
         .addCase(createTask.pending, (state) =>{
             state.minorLoading = true,
-            state.error = false,
-            state.minorSuccess = false
+            state.error = false
         })
         .addCase(createTask.fulfilled, (state, action) =>{
             state.minorLoading = false,
-            state.minorSuccess = true,
-            state.error = false,
             state.tasks.push(action.payload)
         })
         .addCase(createTask.rejected, (state, action) =>{
             state.minorLoading = false,
-            state.minorSuccess = false,
             state.error = action.payload
-        })
-        .addCase(getResponsable.pending, (state) =>{
-            state.minorLoading = true,
-            state.error = false,
-            state.success = false
-        })
-        .addCase(getResponsable.fulfilled, (state, action) =>{
-            state.minorLoading = false,
-            state.success = true,
-            state.error = false,
-            state.responsable = action.payload
-        })
-        .addCase(getResponsable.rejected, (state, action) =>{
-            state.minorLoading = false,
-            state.success = false,
-            state.responsable = null
-        })
-        .addCase(applyTask.pending, (state) =>{
-            state.error = false,
-            state.success = false
-        })
-        .addCase(applyTask.fulfilled, (state, action) =>{
-            state.loading = false,
-            state.success = true,
-            state.error = false,
-            state.tasks = state.tasks.map(task =>{
-                if(task.id == action.payload.id){
-                    task = action.payload
-                }
-                return task
-            })
-            state.task = action.payload
-        })
-        .addCase(finalize.pending, (state) =>{
-            state.minorLoading = true,
-            state.error = false,
-            state.success = false
-        })
-        .addCase(finalize.fulfilled, (state, action) =>{
-            state.minorLoading = false,
-            state.success = true,
-            state.error = false,
-            state.tasks = state.tasks.map(task =>{
-                if(task.id == action.payload.id){
-                    task = action.payload
-                }
-                return task
-            })
-            state.task.status = action.payload.status
-        })
-        .addCase(finalize.rejected, (state, action) =>{
-            state.minorLoading = false,
-            state.success = false
         })
         .addCase(deleteTask.fulfilled, (state, action) =>{
             state.tasks = state.tasks.filter(task => task.id != action.payload),
             state.task = {}
         })
-        .addCase(taskBelongsTo.pending, (state) =>{
-            state.nameLoading = true,
-            state.error = false,
-            state.success = false
-        })
-        .addCase(taskBelongsTo.fulfilled, (state, action) =>{
-            state.nameLoading = false,
-            state.success = true,
-            state.error = false,
-            state.projectName = action.payload
+        .addCase(updateTask.fulfilled, (state, action) =>{
+            state.task = action.payload
         })
     }
 })
 
-export const { resetStates, setTask } = taskReducer.actions
+export const { resetStates, setTask, resetTasks, changeTasksLocally, updateTasksLocally } = taskReducer.actions
 export default taskReducer.reducer

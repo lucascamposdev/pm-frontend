@@ -31,21 +31,6 @@ export const getprofile = createAsyncThunk(
     }
 )
 
-export const getmanager = createAsyncThunk(
-    "user/getmanager",
-    async(id, thunkAPI) =>{
-        const token = await thunkAPI.getState().authReducer.auth.token
-        const data = await userService.getprofile(id, token)
-
-        // Check Errors
-        if(data.error){
-            return thunkAPI.rejectWithValue(data.message)
-        }
-
-        return data
-    }
-)
-
 export const update = createAsyncThunk(
     "user/update",
     async(payload, thunkAPI) =>{
@@ -63,11 +48,12 @@ export const update = createAsyncThunk(
 
 const initialState = {
     user: null,
-    profile: null,
-    manager: '',
-    error: false,
     loading: false,
-    success: false
+    error: false,
+    success: false,
+    profile: null,
+    loadingProfile: false,
+    manager: ''
 }
 
 export const userReducer = createSlice({
@@ -84,6 +70,7 @@ export const userReducer = createSlice({
         builder
         .addCase(getuser.pending, (state) =>{
             state.loading = true,
+            state.user = null,
             state.error = false,
             state.success = false
         })
@@ -99,19 +86,11 @@ export const userReducer = createSlice({
             state.user = null
         })
         .addCase(getprofile.pending, (state) =>{
-            state.loading = true,
-            state.error = false,
-            state.success = false
+            state.loadingProfile = true
         })
         .addCase(getprofile.fulfilled, (state, action) =>{
-            state.loading = false,
-            state.error = false,
+            state.loadingProfile = false,
             state.profile = action.payload
-        })
-        .addCase(getprofile.rejected, (state, action) =>{
-            state.loading = false,
-            state.error = action.payload
-            state.profile = null
         })
         .addCase(update.pending, (state) =>{
             state.loading = true,
@@ -131,11 +110,6 @@ export const userReducer = createSlice({
             state.loading = false,
             state.success = false,
             state.error = action.payload
-        })
-        .addCase(getmanager.fulfilled, (state, action) =>{
-            state.loading = false,
-            state.error = false,
-            state.manager = action.payload
         })
     }
 })

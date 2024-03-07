@@ -1,31 +1,46 @@
-import styles from './Sidebar.module.css'
+import { useRef, useState } from 'react'
+import * as S from './styles'
 
-import { NavLink } from 'react-router-dom'
+import Path from '../../../assets/images/icon-green.svg';
+
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
+import FolderCopyIcon from '@mui/icons-material/FolderCopy';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 
 const Sidebar = () => {
+  const [ isOpen, setIsOpen ] = useState(true)
 
   return (
-    <aside className={styles.sidebar} >
+    <S.Sidebar isOpen={isOpen}>
+        {isOpen ?
+        <S.Icon onClick={() => setIsOpen(!isOpen)}>
+          <ChevronLeftIcon fontSize='large'/>
+        </S.Icon>
+        :
+        <S.Icon onClick={() => setIsOpen(!isOpen)}>
+          <ChevronRightIcon fontSize='large'/>
+        </S.Icon>
+        }
 
-        <i className={`bi bi-caret-right-fill ${styles.icon}`}></i>
+        <S.LinksContainer isOpen={isOpen}>
+            <S.Header>
+              <S.Logo src={Path} alt="logo" />
+              <S.Hr/>
+              <S.Label>Organização</S.Label>
+            </S.Header>
 
-        <div className={styles.links_container}>
-
-            <header className={styles.links_header}>
-                <i className="bi bi-database"></i>
-                <p>Organização</p>
-            </header>
-
-            <NavLink to='/' className={styles.link}>
-                <p className='link-name'>Projetos</p>
-            </NavLink>
-
-            <NavLink to='/tasks' className={styles.link}>
-                <p className='link-name'>Suas Tasks</p>
-            </NavLink>
-        </div>  
-
-    </aside>
+            <S.StyledLink to='/'>
+              <FolderCopyIcon/>
+              Projetos
+            </S.StyledLink>
+            <S.StyledLink to='/tasks'>
+              <FormatListBulletedIcon/>
+              Tasks
+            </S.StyledLink>
+        </S.LinksContainer>  
+    </S.Sidebar>
   )
 }
 

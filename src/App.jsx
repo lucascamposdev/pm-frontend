@@ -1,23 +1,28 @@
-import './App.css'
-
 // Router
-import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 // Hooks
 import { useSelector } from 'react-redux';
 
 // Pages
-import Home from './pages/home/Home'
-import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
-import Tasks from './pages/your-tasks/Tasks'
+import Home from '@pages/Home'
+import Login from '@pages/Auth/Login';
+import Register from '@pages/Auth/Register';
+import Tasks from '@pages/YourTasks/Tasks'
+import ProjectPage from '@pages/Project';
 
 // Components
-import Navbar from './components/layout/Navbar/Navbar';
-import Sidebar from './components/layout/Sidebar/Sidebar';
-import NewProject from './pages/new-project/NewProject';
-import ProjectPage from './pages/project-page/ProjectPage';
-import Account from './pages/account/Account';
+import { Sidebar, Navbar } from '@components';
+import Modal from './components/ui/Modal/Modal';
+
+// Styles
+import GlobalStyle from '@styles/globalStyles';
+import { Main } from '@styles/Container';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './styles/theme';
+
+// Context
+import { ModalProvider } from './context/modalContext';
 
 function App() {
 
@@ -25,21 +30,25 @@ function App() {
 
   return (
     <>
-    <BrowserRouter>
-    {auth ? <Navbar/> : ""}
-    <main className='container'>
-      {auth ? <Sidebar/> : ""}
-        <Routes>
-          <Route path='/' element={auth ? <Home/> : <Navigate to='/login' />}/>
-          <Route path='/tasks' element={auth ? <Tasks/> : <Navigate to='/login' />}/>
-          <Route path='/new' element={auth ? <NewProject/> : <Navigate to='/login' />}/>
-          <Route path='/:id' element={auth ? <ProjectPage/> : <Navigate to='/login' />}/>
-          <Route path='/account' element={auth ? <Account/> : <Navigate to='/login' />}/>
-          <Route path='/login' element={auth ? <Home/> : <Login/> }/>
-          <Route path='/register' element={auth ? <Home/> : <Register/> }/>
-        </Routes>
-    </main>
-    </BrowserRouter>
+      <BrowserRouter>
+        <GlobalStyle />
+        <ThemeProvider theme={theme}>
+          {auth ? <Navbar /> : ""}
+          <Main>
+            {auth ? <Sidebar /> : ""}
+            <ModalProvider>
+              <Modal/>
+            <Routes>
+              <Route path='/' element={auth ? <Home /> : <Navigate to='/login' />} />
+              <Route path='/tasks' element={auth ? <Tasks /> : <Navigate to='/login' />} />
+              <Route path='/:id' element={auth ? <ProjectPage /> : <Navigate to='/login' />} />
+              <Route path='/login' element={auth ? <Home /> : <Login />} />
+              <Route path='/register' element={auth ? <Home /> : <Register />} />
+            </Routes>
+            </ModalProvider>
+          </Main>
+        </ThemeProvider>
+      </BrowserRouter>
     </>
   )
 }
