@@ -1,9 +1,12 @@
 {
-    "rewrites": [
-      {
-        "source": "/(.*)",
-        "destination": "/index.html"
+  "version": 2,
+  "builds": [
+    {
+      "src": "build/index.html",
+      "use": "@vercel/static-build",
+      "config": {
+        "zeroConfig": true
       }
-    ]
-  }
-  
+    }
+  ]
+}
