@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as S from '../styles';
+import * as S from './styles';
 
 // Material Ui
 import CssBaseline from '@mui/material/CssBaseline';
