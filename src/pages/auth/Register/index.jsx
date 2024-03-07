@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as S from './styles';
+import * as S from '../styles';
 
 // Material Ui
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 
 // Reducer
-import { register, resetStates } from '../../reducers/authReducer'
+import { register, resetStates } from '@reducers/authReducer'
 
 
 
