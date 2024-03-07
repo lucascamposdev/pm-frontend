@@ -2,10 +2,16 @@
   "version": 2,
   "builds": [
     {
-      "src": "build/index.html",
+      "src": "index.html",
       "use": "@vercel/static-build",
       "config": {
-        "zeroConfig": true
+        "zeroConfig": true,
+        "plugins": [
+          {
+            "name": "vite-plugin",
+            "inputs": ["vite.config.js"]
+          }
+        ]
       }
     }
   ]
