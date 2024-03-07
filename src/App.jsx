@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 
 // Pages
 import Home from '@pages/Home'
-import Login from '@pages/Auth';
-import Register from '@pages/Auth';
+import Login from './pages/Auth/Login';
+import Register from './pages/Auth/Register'
 import Tasks from '@pages/YourTasks/Tasks'
 import ProjectPage from '@pages/Project';
 
