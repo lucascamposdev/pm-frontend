@@ -1,18 +1,9 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "zeroConfig": true,
-        "plugins": [
-          {
-            "name": "vite-plugin",
-            "inputs": ["vite.config.js"]
-          }
-        ]
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/index.html"
       }
-    }
-  ]
-}
+    ]
+  }
+  
