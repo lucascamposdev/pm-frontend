@@ -1,3 +1,3 @@
-const api = 'https://project-manager-backend-plum.vercel.app/api'
+const api = 'https://project-manager-backend-blush.vercel.app/api'
 
 export default api;
