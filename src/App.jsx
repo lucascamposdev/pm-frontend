@@ -5,11 +5,11 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 // Pages
-import Home from './pages/Home'
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Tasks from './pages/YourTasks/Tasks'
-import ProjectPage from './pages/Project';
+import Home from '@pages/Home'
+import Login from '@pages/Login';
+import Register from '@pages/Register';
+import Tasks from '@pages/YourTasks/Tasks'
+import ProjectPage from '@pages/Project';
 
 // Components
 import { Sidebar, Navbar } from '@components';
