@@ -22,6 +22,7 @@ const ProjectPage = () => {
 
   const { id } = useParams();
   const { project, error, loading } = useSelector(state => state.projectReducer)
+  const { minorLoading: tasksLoading } = useSelector(state => state.taskReducer)
 
   const numberId = parseInt(id)
   
@@ -30,11 +31,11 @@ const ProjectPage = () => {
     dispatch(allProjectTasks(numberId))
   }, [id])
 
-  if(loading){
+  if(loading || tasksLoading){
     return <ProjectPageSkeleton/>
   }
   
-  if(!project && !loading && error){
+  if(!project && !loading && tasksLoading && error){
     return <div> erro! ...</div>
   }
 
