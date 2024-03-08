@@ -22,7 +22,7 @@ const ProjectPage = () => {
 
   const { id } = useParams();
   const { project, error, loading } = useSelector(state => state.projectReducer)
-  const { minorLoading: tasksLoading } = useSelector(state => state.taskReducer)
+  const { loading: tasksLoading } = useSelector(state => state.taskReducer)
 
   const numberId = parseInt(id)
   
@@ -35,7 +35,7 @@ const ProjectPage = () => {
     return <ProjectPageSkeleton/>
   }
   
-  if(!project && !loading && tasksLoading && error){
+  if(!project && !loading && !tasksLoading && error){
     return <div> erro! ...</div>
   }
 
