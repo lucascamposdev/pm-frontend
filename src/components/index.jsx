@@ -7,6 +7,7 @@ import Menu from "./ui/Menu/Menu";
 import Responsable from "./ui/Responsable/Responsable";
 import DatePicker from "./ui/DatePicker/DatePicker";
 import DeliverDate from "./ui/DeliverDate/DeliverDate";
+import Spinner from "./ui/Spinner/Spinner";
 
 import Navbar from "./layout/Navbar/Navbar";
 import Sidebar from "./layout/Sidebar/Sidebar";
@@ -29,5 +30,6 @@ export {
     TaskOptions,
     Responsable,
     DatePicker,
-    DeliverDate
+    DeliverDate,
+    Spinner
 }

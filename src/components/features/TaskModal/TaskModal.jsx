@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 
 // Components
 import TaskModalContent from './components/Content';
+import { Spinner } from '@components'
 
 const TaskModal = React.forwardRef((props, ref) => {
 
@@ -24,15 +25,16 @@ const TaskModal = React.forwardRef((props, ref) => {
   }, [props.id])
 
   return (
+    <>
+    {loading || !task ?
+    <Spinner/>
+    :
     <S.Container>
-      {loading ?
-      <p>Aqui Vai Um Loading...</p>
-      : task ?
       <TaskModalContent task={task}/>
-      :
-      <div>error...</div>
-      }    
+      {/* <div>error...</div>    */}
     </S.Container>
+    }
+    </>
   )
 })
 

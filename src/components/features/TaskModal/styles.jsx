@@ -1,4 +1,14 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
+
+const showUp = keyframes`
+    from{
+        opacity: 0;
+        margin-top: -20px;
+    }
+    to{
+        opacity: 1;
+    }
+`
 
 export const Container = styled.section`
     background: white;
@@ -12,4 +22,6 @@ export const Container = styled.section`
 
     width: 100%;
     max-width: 600px;
+
+    animation: ${showUp} .25s ease;
 `

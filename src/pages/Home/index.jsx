@@ -20,7 +20,6 @@ const Home = () => {
     dispatch(getProjects()) 
   }, [])
 
-
   return (
   <S.Container>
     <S.Header>

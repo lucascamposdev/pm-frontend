@@ -154,18 +154,20 @@ export const projectReducer = createSlice({
         })
         .addCase(getProjectById.pending, (state) =>{
             state.project = null,
+            state.success = false,
             state.loading = true,
             state.error = false
         })
         .addCase(getProjectById.fulfilled, (state, action) =>{
             state.loading = false,
             state.error = false,
+            state.success = true,
             state.project = action.payload
         })
         .addCase(getProjectById.rejected, (state, action) =>{
             state.loading = false,
             state.success = false,
-            state.error = action.payload
+            state.error = true,
             state.project = null
         })
         .addCase(create.pending, (state) =>{
@@ -200,10 +202,7 @@ export const projectReducer = createSlice({
         })
         .addCase(deleteProject.fulfilled, (state, action) =>{
             state.loading = false,
-            state.error = false,
-            state.project = null,
-            console.log(action.payload),
-            state.projects = state.projects.filter(p => p.id != action.payload)
+            state.project = null
         })
         .addCase(finalize.fulfilled, (state, action) =>{
             state.loading = false,

@@ -16,14 +16,12 @@ import ProjectHeader from './components/Header/Header';
 import ProjectBody from './components/Body';
 import {ProjectPageSkeleton} from '@components';
 
-
 const ProjectPage = () => {
 
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  const { project } = useSelector(state => state.projectReducer)
-  const { loading: tasksLoading } = useSelector(state => state.taskReducer)
+  const { project, error, loading } = useSelector(state => state.projectReducer)
 
   const numberId = parseInt(id)
   
@@ -32,7 +30,15 @@ const ProjectPage = () => {
     dispatch(allProjectTasks(numberId))
   }, [id])
 
-  if(!project || tasksLoading){
+  if(loading){
+    return <ProjectPageSkeleton/>
+  }
+  
+  if(!project && !loading && error){
+    return <div> erro! ...</div>
+  }
+
+  if(!project){
     return <ProjectPageSkeleton/>
   }
   
