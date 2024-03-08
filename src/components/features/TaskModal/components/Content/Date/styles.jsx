@@ -40,3 +40,27 @@ export const Button = styled.button`
         filter: brightness(0.9);
     }
 `
+
+export const ShowDateContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    gap: .5rem;
+`
+export const Label = styled.label`
+    font-family: 'main';
+    font-weight: bold;
+    padding-inline: .5rem;
+    font-size: .9rem;
+`
+
+export const DateContainer = styled.span`
+    ${({ isAdmin }) => !isAdmin ? 
+    `cursor: default;`: 
+    `&:hover{
+        filter: brightness(.95);
+        cursor: pointer;
+    }`
+    }
+`

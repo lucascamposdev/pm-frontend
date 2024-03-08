@@ -7,12 +7,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import TaskStatus from '@utils/TaskStatus'
 
 // Components
-import { TaskOptions, Responsable } from '@components'
+import { TaskOptions, Responsable, DeliverDate } from '@components'
 import Title from './Title/Title';
 import Description from './Description/Description';
 
 import { useModal } from '@context/modalContext';
-import Date from './Date/Date';
+import AddDate from './Date/AddDate';
+import ShowDate from './Date/ShowDate';
 
 const TaskModalContent = ({ task }) => {
 
@@ -36,7 +37,7 @@ const TaskModalContent = ({ task }) => {
     <Description task={task}/>
 
     <S.Wrapper>
-      <Date task={task}/>
+      {task.deliverTime ? <ShowDate task={task}/> : <AddDate task={task}/>}
       <Responsable task={task}/>
     </S.Wrapper>
     </>

@@ -19,7 +19,6 @@ import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 // React
 import { useState } from 'react';
 
-
 const ProjectBody = () => {
 
   const dispatch = useDispatch();
@@ -57,7 +56,7 @@ const ProjectBody = () => {
 
     // Different Column
     setActiveItem(null)
-    dispatch(changeTasksLocally({...active.data.current, status: payload.newStatus, type: 'status'}))
+    dispatch(changeTasksLocally({...active.data.current, status: payload.newStatus}))
     dispatch(changeTaskStatus(payload))
   }
 

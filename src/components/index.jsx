@@ -6,6 +6,7 @@ import Tooltip from "./ui/Tooltip/Tooltip";
 import Menu from "./ui/Menu/Menu";
 import Responsable from "./ui/Responsable/Responsable";
 import DatePicker from "./ui/DatePicker/DatePicker";
+import DeliverDate from "./ui/DeliverDate/DeliverDate";
 
 import Navbar from "./layout/Navbar/Navbar";
 import Sidebar from "./layout/Sidebar/Sidebar";
@@ -27,5 +28,6 @@ export {
     TaskModal,
     TaskOptions,
     Responsable,
-    DatePicker
+    DatePicker,
+    DeliverDate
 }

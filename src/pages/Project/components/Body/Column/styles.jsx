@@ -22,6 +22,7 @@ export const Header = styled.div`
     padding-inline: 10px ;
     position: sticky;
     top: 0;
+    z-index: 1;
     background: var(--second-color);
 `
 

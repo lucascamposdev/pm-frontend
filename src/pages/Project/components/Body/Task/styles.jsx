@@ -7,6 +7,7 @@ export const Task = styled.div`
 
     display: flex;
     flex-direction: column;
+    position: relative;
     border-radius: 3px;
     box-shadow: 0px 0px 3px 0 #a9a8a8;
 
@@ -18,12 +19,27 @@ export const Task = styled.div`
     padding: 1rem;
 
     cursor: pointer;
+
+    ${({ isTransform }) => isTransform ? `
+         &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #d1cdcd;
+            box-shadow: 0px 0px 3px 0 #9d9c9c;
+            border-radius: 3px;
+        };
+    ` : ''}
 `
 
 export const Wrapper = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
+    margin-top: .5rem;
 `
 
 export const Priority = styled.span`
@@ -32,6 +48,7 @@ export const Priority = styled.span`
     border-radius: 3px;
     height: 8px;
     margin-bottom: .5rem;
+    cursor: default;
 `
 
 export const Name = styled.p`

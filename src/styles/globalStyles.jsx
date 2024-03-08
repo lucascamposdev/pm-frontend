@@ -21,12 +21,12 @@ const GlobalStyle = createGlobalStyle`
 
 @font-face {
     font-family: 'Main';
-    src: url('src/public/fonts/Euclid-Regular.ttf') format('truetype');
+    src: url('public/fonts/Euclid-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Second';
-    src: url('src/public/fonts/Libre-Regular.ttf') format('truetype');
+    src: url('public/fonts/Libre-Regular.ttf') format('truetype');
 }
 
 *{

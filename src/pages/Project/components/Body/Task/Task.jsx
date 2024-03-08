@@ -4,7 +4,7 @@ import * as S from './styles'
 import { useDraggable } from '@dnd-kit/core';
 
 // Components
-import { TaskModal, TaskOptions, Responsable } from '@components';
+import { TaskModal, TaskOptions, Responsable, DeliverDate } from '@components';
 
 // Context
 import { useModal } from '@context/modalContext';
@@ -29,13 +29,14 @@ const Task = ({ item }) => {
   };
 
   return (
-    <S.Task ref={setNodeRef} {...extendedListeners} {...attributes}>
+    <S.Task ref={setNodeRef} {...extendedListeners} {...attributes} isTransform={transform}>
       <S.Priority priority={item.priority}/>
       <S.Wrapper data-clickable='true'>
         <S.Name data-clickable='true'>{item.name}</S.Name>
         <TaskOptions task={item} />
       </S.Wrapper>
       <S.Wrapper data-clickable='true'>
+          {item.deliverTime ? <DeliverDate task={item} variant='small'/> : ''} 
           <Responsable task={item}/>
       </S.Wrapper>
     </S.Task>

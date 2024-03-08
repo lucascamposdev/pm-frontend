@@ -13,7 +13,7 @@ import { useParams } from 'react-router-dom'
 
 // Components
 import ProjectHeader from './components/Header/Header';
-import ProjectBody from './components/Body/Body';
+import ProjectBody from './components/Body';
 import {ProjectPageSkeleton} from '@components';
 
 

@@ -33,7 +33,7 @@ const Description = ({ task }) => {
         closeEdition();
     }
 
-    const { inputRef, isInput, openEdition, closeEdition, closeEditionWithButtons } = useEditable(submitFunc);
+    const { inputRef, isInput, openEdition, closeEdition, closeEditionWithButtons } = useEditable();
 
   return (
     <>

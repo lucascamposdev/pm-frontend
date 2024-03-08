@@ -3,10 +3,16 @@ import * as S from './styles'
 
 // Components
 import { DatePicker } from '@components'
-import { useDispatch } from 'react-redux';
-import { updateTask } from '@reducers/taskReducer'
 
-const DeliverDate = ({ task }) => {
+// Reducer
+import { useDispatch } from 'react-redux';
+import { updateTask, updateTasksLocally, setTask } from '@reducers/taskReducer'
+
+// Hooks
+import useIsAdmin from '@hooks/useIsAdmin'
+
+const AddDate = ({ task }) => {
+    const { isAdmin } = useIsAdmin();
     const [ dateVal, setDateVal ] = useState();
     const [ isOpen, setIsOpen ] = useState();
     const dispatch = useDispatch();
@@ -30,14 +36,18 @@ const DeliverDate = ({ task }) => {
 
         const payload = {
             ...task,
-            deliverTime: dateVal
+            deliverTime: dateVal + 'T00:00:00.000Z' 
         }
 
+        dispatch(setTask(payload))
+        dispatch(updateTasksLocally(payload))
         dispatch(updateTask(payload))
         setIsOpen(false)
     }
 
-  return (
+    if(!isAdmin) return null;
+    
+    return (
     <div>
         {!isOpen ?
         <S.AddDate onClick={()=> setIsOpen(true)}>Adicionar Data de Entrega</S.AddDate>
@@ -54,4 +64,4 @@ const DeliverDate = ({ task }) => {
   )
 }
 
-export default DeliverDate
+export default AddDate;

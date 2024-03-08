@@ -10,7 +10,7 @@ const DatePicker = ({ onChangeFunc }) => {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['MUIDatePicker']}>
         <MUIDatePicker 
-        label="Basic date picker" 
+        label="Escolha uma data" 
         onChange={onChangeFunc}
         defaultDate={new Date()}
         format='DD/MM/YYYY'
