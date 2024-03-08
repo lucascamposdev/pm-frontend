@@ -40,7 +40,7 @@ function App() {
               <Modal/>
             <Routes>
               <Route path='/' element={auth ? <Home /> : <Navigate to='/login' />} />
-              <Route path='/tasks' element={auth ? <Tasks /> : <Navigate to='/login' />} />
+              {/* <Route path='/tasks' element={auth ? <Tasks /> : <Navigate to='/login' />} /> */}
               <Route path='/:id' element={auth ? <ProjectPage /> : <Navigate to='/login' />} />
               <Route path='/login' element={auth ? <Home /> : <Login />} />
               <Route path='/register' element={auth ? <Home /> : <Register />} />

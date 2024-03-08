@@ -35,10 +35,10 @@ const Sidebar = () => {
               <FolderCopyIcon/>
               Projetos
             </S.StyledLink>
-            <S.StyledLink to='/tasks'>
+            {/* <S.StyledLink to='/tasks'>
               <FormatListBulletedIcon/>
               Tasks
-            </S.StyledLink>
+            </S.StyledLink> */}
         </S.LinksContainer>  
     </S.Sidebar>
   )
