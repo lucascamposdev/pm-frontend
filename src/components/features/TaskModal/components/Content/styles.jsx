@@ -48,6 +48,5 @@ export const Label = styled.label`
 export const Wrapper = styled.div`
     display: flex;
     align-items: center;
-    margin-block: 1rem;
-
+    margin-top: 1rem;
 `

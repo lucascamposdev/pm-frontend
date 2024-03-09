@@ -36,7 +36,7 @@ const ProjectPage = () => {
   }
   
   if(!project && !loading && !tasksLoading && error){
-    return <div> erro! ...</div>
+    return <div> Esse projeto não existe! volte para a tela inicial.</div>
   }
 
   if(!project){
