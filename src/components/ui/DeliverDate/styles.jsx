@@ -11,10 +11,11 @@ export const Container = styled.span`
 
     padding: .3rem .5rem;
     background-color: var(--second-color);
+    
 
     ${({ variant }) => variant === 'small' ? 
     `cursor: default;`: 
-    ``
+    `margin-left: .5rem;`
     }
 
     
@@ -22,11 +23,11 @@ export const Container = styled.span`
 
 export const ClockIcon = styled(AccessTimeIcon)`
 ${({ variant }) => variant === 'small' ? 
-`font-size: 18px !important;`: 'font-size: 25px !important'}
+`font-size: 18px !important;`: 'font-size: 20px !important'}
 `
 
 export const Text = styled.p`
 font-family: 'main';
 ${({ variant }) => variant === 'small' ? 
-`font-size: 15px !important;`: 'font-size: 25px !important'}
+`font-size: 15px !important;`: 'font-size: 20px !important'}
 `

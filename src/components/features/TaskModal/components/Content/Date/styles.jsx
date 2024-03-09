@@ -31,7 +31,7 @@ export const Button = styled.button`
   `}
     font-family: 'main';
     padding: .5rem .8rem;
-    margin-right: .5rem;
+    margin-left: .5rem;
     font-weight: bold;
     cursor: pointer;
     border: none;
