@@ -37,7 +37,7 @@ const Task = ({ item }) => {
       </S.Wrapper>
       <S.Wrapper data-clickable='true'>
           {item.deliverTime ? <DeliverDate task={item} variant='small'/> : ''} 
-          <Responsable task={item}/>
+          <Responsable task={item} variant='small'/>
       </S.Wrapper>
     </S.Task>
   )

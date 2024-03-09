@@ -49,4 +49,5 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: center;
     margin-block: 1rem;
+
 `

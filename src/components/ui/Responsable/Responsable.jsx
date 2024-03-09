@@ -4,7 +4,7 @@ import { Tooltip } from '@components'
 
 import userInitials from '@utils/userInitials'
 
-const Responsable = ({ task }) => {
+const Responsable = ({ task, variant }) => {
 
   const isResponsable = task.userId ? true : false
 
@@ -15,7 +15,7 @@ const Responsable = ({ task }) => {
     `Responsável: ${task.responsable.name} ${task.responsable.lastName}` 
     : 'Sem Responsável'}>
 
-    <S.Image isResponsable={isResponsable}>
+    <S.Image isResponsable={isResponsable} variant={variant}>
       {isResponsable ? userInitials(task.responsable.name, task.responsable.lastName) : ''}
     </S.Image>
 
