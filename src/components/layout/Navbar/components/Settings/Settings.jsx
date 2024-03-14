@@ -42,7 +42,7 @@ const Settings = () => {
 
   return (
     <>
-      <S.Settings title="Open settings" >
+      <S.Settings title="Configurações" >
         <IconButton onClick={handleClick} sx={{ marginLeft: 'auto' }}>
           {profile ? 
           <S.Avatar>{userInitials(profile.name, profile.lastName)}</S.Avatar>

@@ -4,13 +4,11 @@ export const Column = styled.div`
     display: flex;
     flex-direction: column;
 
-    width: 100%;
-
     max-height: 100%;
     background: var(--second-color);
     border-radius: 3px;
 
-    overflow-y: auto;
+    overflow: auto;
     box-shadow: 0px 0px 3px 0 #a9a8a8;
     scrollbar-width: none;
     -ms-overflow-style: none; 

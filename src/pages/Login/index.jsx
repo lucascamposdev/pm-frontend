@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import { Container } from '@mui/material';
 
 // React
 import { useEffect } from 'react';
@@ -40,7 +41,7 @@ const Login = ()  => {
   }
 
   return (
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container component="main" sx={{ height: '100vh'}}>
         <CssBaseline />
         <Grid
           item
@@ -48,12 +49,7 @@ const Login = ()  => {
           sm={3}
           md={7}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
-            backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            background: 'var(--third-color)',
           }}
         />
         <Grid item xs={12} sm={9} md={5}  square="true" alignSelf='center' >
@@ -105,11 +101,6 @@ const Login = ()  => {
               </S.StyledButton>
 
               <Grid container>
-                {/* <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid> */}
                 <Grid item sx={{ width: '100%', textAlign: 'center' }}>
                   <S.StyledLink to='/register'>
                       Ainda não possui uma conta? <u>Cadastre-se</u>

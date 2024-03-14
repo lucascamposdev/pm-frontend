@@ -27,8 +27,3 @@ ReactDOM.createRoot(document.getElementById('toast-root')).render(
       closeButton={false}/>
 ,
 )
-
-// ReactDOM.createRoot(document.getElementById('modal-root')).render(
-//   <Modal/>
-// ,
-// )

@@ -8,18 +8,19 @@ import { useSelector } from 'react-redux';
 import Home from '@pages/Home'
 import Login from '@pages/Login';
 import Register from '@pages/Register';
-import Tasks from '@pages/YourTasks/Tasks'
 import ProjectPage from '@pages/Project';
+import ErrorPage from '@pages/ErrorPage'
 
 // Components
 import { Sidebar, Navbar } from '@components';
 import Modal from './components/ui/Modal/Modal';
 
 // Styles
+import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '@styles/globalStyles';
-import { Main } from '@styles/Container';
-import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme';
+import { Main } from '@styles/Container';
+import { Content } from './styles/Container';
 
 // Context
 import { ModalProvider } from './context/modalContext';
@@ -33,19 +34,21 @@ function App() {
       <BrowserRouter>
         <GlobalStyle />
         <ThemeProvider theme={theme}>
-          {auth ? <Navbar /> : ""}
           <Main>
+          {auth ? <Navbar /> : ""}
+          <Content>
             {auth ? <Sidebar /> : ""}
             <ModalProvider>
               <Modal/>
-            <Routes>
-              <Route path='/' element={auth ? <Home /> : <Navigate to='/login' />} />
-              {/* <Route path='/tasks' element={auth ? <Tasks /> : <Navigate to='/login' />} /> */}
-              <Route path='/:id' element={auth ? <ProjectPage /> : <Navigate to='/login' />} />
-              <Route path='/login' element={auth ? <Home /> : <Login />} />
-              <Route path='/register' element={auth ? <Home /> : <Register />} />
-            </Routes>
+              <Routes>
+                <Route path='/' element={auth ? <Home /> : <Navigate to='/login' />} />
+                <Route path='/project/:id' element={auth ? <ProjectPage /> : <Navigate to='/login' />} />
+                <Route path='/login' element={auth ? <Home /> : <Login />} />
+                <Route path='/register' element={auth ? <Home /> : <Register />} />
+                <Route path="*" element={<ErrorPage/>}/>
+              </Routes>
             </ModalProvider>
+          </Content>
           </Main>
         </ThemeProvider>
       </BrowserRouter>

@@ -5,9 +5,10 @@ import { priorityStyles } from '@styles/Miscellaneous'
 export const Task = styled.div`
     background: #fff;
 
+    position: relative;
+    
     display: flex;
     flex-direction: column;
-    position: relative;
     border-radius: 3px;
     box-shadow: 0px 0px 3px 0 #a9a8a8;
 
@@ -40,6 +41,7 @@ export const Wrapper = styled.div`
     align-items: center;
     width: 100%;
     margin-top: .5rem;
+
 `
 
 export const Priority = styled.span`
@@ -53,8 +55,13 @@ export const Priority = styled.span`
 
 export const Name = styled.p`
     color: #626F86;
+    width:85%;
     word-wrap: break-word;
-    width: 87%;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 `
 
 

@@ -13,8 +13,9 @@ import { useParams } from 'react-router-dom'
 
 // Components
 import ProjectHeader from './components/Header/Header';
-import ProjectBody from './components/Body';
+import Board from './components/Board';
 import {ProjectPageSkeleton} from '@components';
+import ErrorPage from '@pages/ErrorPage'
 
 const ProjectPage = () => {
 
@@ -24,11 +25,9 @@ const ProjectPage = () => {
   const { project, error, loading } = useSelector(state => state.projectReducer)
   const { loading: tasksLoading } = useSelector(state => state.taskReducer)
 
-  const numberId = parseInt(id)
-  
   useEffect(() => {
-    dispatch(getProjectById(numberId))
-    dispatch(allProjectTasks(numberId))
+    dispatch(getProjectById(id))
+    dispatch(allProjectTasks(id))
   }, [id])
 
   if(loading || tasksLoading){
@@ -36,7 +35,7 @@ const ProjectPage = () => {
   }
   
   if(!project && !loading && !tasksLoading && error){
-    return <div> Esse projeto não existe! volte para a tela inicial.</div>
+    return <ErrorPage/>
   }
 
   if(!project){
@@ -46,7 +45,7 @@ const ProjectPage = () => {
   return (
     <S.Container>
       <ProjectHeader project={project}/>
-      <ProjectBody projectId={numberId}/>
+      <Board projectId={id}/>
     </S.Container>
   )
 }

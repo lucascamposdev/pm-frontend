@@ -13,6 +13,7 @@ import { useModal} from '@context/modalContext'
 
 // Components
 import { ConfirmModalContent } from '@components'
+import ErrorPage from '@pages/ErrorPage'
 
 
 const DeleteProject = () => {
@@ -25,7 +26,7 @@ const DeleteProject = () => {
 
   const handleDelete = () => {
     dispatch(deleteProject(project.id))
-    navigate('/')
+    navigate('/error')
     closeModal();
   }
 

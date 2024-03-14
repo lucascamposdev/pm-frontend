@@ -2,18 +2,17 @@ import { DragOverlay } from "@dnd-kit/core";
 import styled from "styled-components";
 
 export const Container = styled.section`
-    display: flex;
-    align-items: start;
-    justify-content: start;
     height: 100%;
-
     width: 100%;
+
+    display: grid;
+    align-items: start;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 
     gap: 1rem;
     padding: 0rem 2rem 1rem 2rem;
 
-    overflow: auto;
-
+    overflow: hidden;
 `
 
 export const StyledDragOverlay = styled(DragOverlay)`

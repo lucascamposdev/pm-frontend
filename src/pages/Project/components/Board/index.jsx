@@ -19,7 +19,7 @@ import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 // React
 import { useState } from 'react';
 
-const ProjectBody = () => {
+const Board = () => {
 
   const dispatch = useDispatch();
   const { isAdmin } = useIsAdmin();
@@ -101,4 +101,4 @@ const ProjectBody = () => {
   )
 }
 
-export default ProjectBody
+export default Board;

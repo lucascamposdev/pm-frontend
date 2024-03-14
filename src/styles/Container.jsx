@@ -2,10 +2,17 @@ import styled from "styled-components";
 
 export const Main = styled.main`
   display: flex;
+  flex-direction: column;
 
   width: 100vw;
-  height: 92vh;
+  height: 100vh;
   overflow: auto;
+`
+
+export const Content = styled.section`
+  display: flex;
+  width: 100%;
+  height: 92.5vh;
 `
 
 export const Page = styled.section`

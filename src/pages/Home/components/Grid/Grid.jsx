@@ -27,7 +27,7 @@ const HomeGrid = ({ projects, projectsLoading }) => {
         <S.Skeleton/> 
         :
         list.map((project, index) => (
-          <Link key={project.id} to={`/${project.id}`}>
+          <Link key={project.id} to={`/project/${project.id}`}>
             <S.Project indexLine={index}>
               <S.Icon/>
                 {project.name}
