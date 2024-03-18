@@ -17,12 +17,12 @@
   
   @font-face {
       font-family: 'Main';
-      src: url('./fonts/Euclid-Regular.ttf') format('truetype');
+      src: url('src/fonts/Euclid-Regular.ttf') format('truetype');
   }
   
   @font-face {
       font-family: 'Second';
-      src: url('./fonts/Libre-Regular.ttf') format('truetype');
+      src: url('src/fonts/Libre-Regular.ttf') format('truetype');
   }
 
   *{
