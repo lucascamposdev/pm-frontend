@@ -15,7 +15,7 @@ import { Menu } from '@components'
 import { useSelector } from 'react-redux';
 
 // Components
-import { LoadingSpinner } from '@components'
+import { Spinner as LoadingSpinner } from '@components'
 import { MoreHoriz } from '@mui/icons-material';
 
 // Hooks

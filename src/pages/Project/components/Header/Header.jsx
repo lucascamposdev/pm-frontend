@@ -7,14 +7,15 @@ import ProjectTitle from './Title/Title'
 import DotsMenu from './DotsMenu/DotsMenu'
 
 // Reducer
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getProjectAdmin } from '@reducers/projectReducer';
 
 // React
 import { useEffect } from 'react';
 
-const ProjectHeader = ({ project }) => {
+const ProjectHeader = () => {
 
+  const { project } = useSelector(state => state.projectReducer)
   const dispatch = useDispatch();
 
   useEffect(() =>{
@@ -25,7 +26,7 @@ const ProjectHeader = ({ project }) => {
     <S.Header>
       {project ?
       <>
-        <ProjectTitle/>
+        <ProjectTitle project={project}/>
         <DotsMenu/>
       </>
         :

@@ -3,7 +3,6 @@ import * as S from './styles';
 
 // Material Ui
 import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -57,7 +56,7 @@ sx={{ display: 'flex',  flexDirection: 'column',alignItems: 'center', justifyCon
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-                <TextField
+                <S.FormInput
                   autoComplete="given-name"
                   name="name"
                   required
@@ -68,7 +67,7 @@ sx={{ display: 'flex',  flexDirection: 'column',alignItems: 'center', justifyCon
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
+                <S.FormInput
                   required
                   fullWidth
                   id="lastName"
@@ -78,7 +77,7 @@ sx={{ display: 'flex',  flexDirection: 'column',alignItems: 'center', justifyCon
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+                <S.FormInput
                   required
                   fullWidth
                   id="email"
@@ -88,7 +87,7 @@ sx={{ display: 'flex',  flexDirection: 'column',alignItems: 'center', justifyCon
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+                <S.FormInput
                   required
                   fullWidth
                   name="password"
@@ -100,7 +99,7 @@ sx={{ display: 'flex',  flexDirection: 'column',alignItems: 'center', justifyCon
               </Grid>
 
               <Grid item xs={12}>
-                <TextField
+                <S.FormInput
                   required
                   fullWidth
                   name="confirmPassword"

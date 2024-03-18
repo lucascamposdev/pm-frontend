@@ -44,8 +44,8 @@ const ProjectPage = () => {
   
   return (
     <S.Container>
-      <ProjectHeader project={project}/>
-      <Board projectId={id}/>
+      <ProjectHeader/>
+      <Board/>
     </S.Container>
   )
 }

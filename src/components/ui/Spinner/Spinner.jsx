@@ -5,8 +5,8 @@ import Box from '@mui/material/Box';
 
 const Spinner = () => {
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CircularProgress />
+    <Box sx={{ display: 'grid', placeContent: 'center' }}>
+      <CircularProgress sx={{ color: 'var(--third-color)'}}/>
     </Box>
   )
 }

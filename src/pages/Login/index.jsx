@@ -2,7 +2,7 @@ import * as S from './styles';
 
 // Material Ui
 import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
+
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { Container } from '@mui/material';
@@ -67,7 +67,7 @@ const Login = ()  => {
             </S.Title>
             <Box component="form" noValidate onSubmit={handleSubmit} 
             sx={{ width: '100%' , maxWidth:'500px', alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
-              <TextField
+              <S.FormInput
                 margin="normal"
                 required
                 fullWidth
@@ -77,7 +77,7 @@ const Login = ()  => {
                 autoComplete="email"
                 autoFocus
               />
-              <TextField
+              <S.FormInput
                 margin="normal"
                 required
                 fullWidth

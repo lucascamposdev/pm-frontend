@@ -15,12 +15,13 @@ import ErrorPage from '@pages/ErrorPage'
 import { Sidebar, Navbar } from '@components';
 import Modal from './components/ui/Modal/Modal';
 
+// Layout
+import { Main } from '@styles/Container';
+import { Content } from '@components';
+
 // Styles
 import { ThemeProvider } from 'styled-components';
-import GlobalStyle from '@styles/globalStyles';
 import theme from './styles/theme';
-import { Main } from '@styles/Container';
-import { Content } from './styles/Container';
 
 // Context
 import { ModalProvider } from './context/modalContext';
@@ -32,7 +33,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <GlobalStyle />
         <ThemeProvider theme={theme}>
           <Main>
           {auth ? <Navbar /> : ""}

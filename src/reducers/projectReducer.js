@@ -187,18 +187,18 @@ export const projectReducer = createSlice({
             state.error = action.payload
         })
         .addCase(update.pending, (state) =>{
-            state.loading = true,
+            state.minorLoading = true,
             state.error = false,
             state.success = false
         })
         .addCase(update.fulfilled, (state, action) =>{
-            state.loading = false,
+            state.minorLoading = false,
             state.success = true,
             state.error = false,
             state.project = action.payload
         })
         .addCase(update.rejected, (state, action) =>{
-            state.loading = false
+            state.minorLoading = false
         })
         .addCase(deleteProject.fulfilled, (state, action) =>{
             state.loading = false,

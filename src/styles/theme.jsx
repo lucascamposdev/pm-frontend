@@ -6,7 +6,7 @@ const theme = {
     error: '#dc3545',
   },
   typography: {
-    fontFamily: 'Arial, sans-serif',
+    fontFamily: 'Second',
     fontSize: '16px',
   },
   // Outras propriedades de tema

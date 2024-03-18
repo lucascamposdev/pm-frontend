@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import * as S from './styles'
 
 import Path from '../../../assets/images/icon-green.svg';
@@ -6,8 +6,7 @@ import Path from '../../../assets/images/icon-green.svg';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-import FolderCopyIcon from '@mui/icons-material/FolderCopy';
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import HomeIcon from '@mui/icons-material/Home';
 
 const Sidebar = () => {
   const [ isOpen, setIsOpen ] = useState(true)
@@ -32,13 +31,10 @@ const Sidebar = () => {
             </S.Header>
 
             <S.StyledLink to='/'>
-              <FolderCopyIcon/>
-              Projetos
+              <HomeIcon/>
+              Início
             </S.StyledLink>
-            {/* <S.StyledLink to='/tasks'>
-              <FormatListBulletedIcon/>
-              Tasks
-            </S.StyledLink> */}
+
         </S.LinksContainer>  
     </S.Sidebar>
   )

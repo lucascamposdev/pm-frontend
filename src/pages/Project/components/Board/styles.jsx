@@ -7,7 +7,7 @@ export const Container = styled.section`
 
     display: grid;
     align-items: start;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 
     gap: 1rem;
     padding: 0rem 2rem 1rem 2rem;

@@ -25,7 +25,6 @@ const login = async(payload) =>{
 
     const config = requestConfig("POST", payload)
 
-    console.log(payload)
     try{
         const res = await fetch(api + '/users/login', config);
         const data = await res.json();

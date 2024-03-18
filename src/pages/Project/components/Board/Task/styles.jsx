@@ -18,6 +18,7 @@ export const Task = styled.div`
     font-family: 'Main';
     font-size: .9rem;
     padding: 1rem;
+    touch-action: none;
 
     cursor: pointer;
 

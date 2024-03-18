@@ -1,17 +1,16 @@
 import * as S from './styles'
 
 // Reducer
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { update } from '@reducers/projectReducer'
 
 // Hooks
 import useEditable from "@hooks/useEditable"
 
 
-const ProjectTitle = () => {
-    const dispatch = useDispatch();
+const ProjectTitle = ({ project }) => {
 
-    const { project, loading } = useSelector(state => state.projectReducer)
+    const dispatch = useDispatch();
     
     const submitNameChange = (e) =>{
         e.preventDefault();
@@ -26,18 +25,20 @@ const ProjectTitle = () => {
         }
         
         dispatch(update(payload))
+        closeEdition();
     }
     
     const { inputRef, isInput, openEdition, closeEdition } = useEditable(submitNameChange);
     
   return (
     <S.TitleContainer > 
-        {project && !loading ? (isInput ?
-            <S.Input defaultValue={project.name} onBlur={closeEdition} ref={inputRef} spellCheck={false}/>
+        {isInput ?
+            <S.Input 
+            defaultValue={project.name} 
+            onBlur={submitNameChange} 
+            ref={inputRef} spellCheck={false}/>
             :
-            <S.Title onClick={openEdition} >{project.name}</S.Title> )     
-        : 
-        <S.TitleSkeleton/>
+            <S.Title onClick={openEdition} >{project.name}</S.Title>
         }       
     </S.TitleContainer>
   )

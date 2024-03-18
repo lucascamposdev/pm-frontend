@@ -9,15 +9,15 @@ export const Settings = styled(Tooltip)`
 
 export const Avatar = styled.div`
     background: var(--fourth-color);
-    height: 38px;
-    width: 38px;
+    height: 32px;
+    width: 32px;
     border-radius: 50%;
 
 
     display: grid;
     place-content: center;
     font-family: 'Main';
-    font-size: 1rem;
+    font-size: .8rem;
     color: var(--third-color);
 
 `

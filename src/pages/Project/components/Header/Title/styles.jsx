@@ -31,7 +31,7 @@ export const Title = styled.h1`
     font-size: 1.2rem;
 
     cursor: pointer;
-    font-family: 'Second';
+    font-family: ${( props ) => props.theme.typography.fontFamily};
     border-radius: 3px;
 
 

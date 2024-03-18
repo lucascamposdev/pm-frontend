@@ -1,6 +1,5 @@
 import styled, { keyframes } from "styled-components";
 
-
 const SkeletonAnimation = keyframes`
     0%{
         opacity: .3;
@@ -34,6 +33,7 @@ export const TitleContainer = styled.div`
     border-radius: 3px;
     background: var(--second-color);
     animation: ${SkeletonAnimation} .75s ease infinite;
+
 `
 
 export const Body = styled.section`
@@ -45,7 +45,6 @@ export const Body = styled.section`
 
 export const Column = styled.div`
     width: 100%;
-    min-width: 260px;
     background: var(--second-color);
     animation: ${SkeletonAnimation} .75s ease infinite;
     border-radius: 3px;
